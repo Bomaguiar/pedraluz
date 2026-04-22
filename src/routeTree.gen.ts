@@ -9,38 +9,190 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as ProcessRouteImport } from './routes/process'
+import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as PartnersRouteImport } from './routes/partners'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesRemodelingRouteImport } from './routes/services.remodeling'
+import { Route as ServicesNewHomeBuildRouteImport } from './routes/services.new-home-build'
+import { Route as ServicesHomeAdditionsRouteImport } from './routes/services.home-additions'
+import { Route as ServicesCommercialRouteImport } from './routes/services.commercial'
 
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProcessRoute = ProcessRouteImport.update({
+  id: '/process',
+  path: '/process',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioRoute = PortfolioRouteImport.update({
+  id: '/portfolio',
+  path: '/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnersRoute = PartnersRouteImport.update({
+  id: '/partners',
+  path: '/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesRemodelingRoute = ServicesRemodelingRouteImport.update({
+  id: '/remodeling',
+  path: '/remodeling',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesNewHomeBuildRoute = ServicesNewHomeBuildRouteImport.update({
+  id: '/new-home-build',
+  path: '/new-home-build',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesHomeAdditionsRoute = ServicesHomeAdditionsRouteImport.update({
+  id: '/home-additions',
+  path: '/home-additions',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesCommercialRoute = ServicesCommercialRouteImport.update({
+  id: '/commercial',
+  path: '/commercial',
+  getParentRoute: () => ServicesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/partners': typeof PartnersRoute
+  '/portfolio': typeof PortfolioRoute
+  '/process': typeof ProcessRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/services/commercial': typeof ServicesCommercialRoute
+  '/services/home-additions': typeof ServicesHomeAdditionsRoute
+  '/services/new-home-build': typeof ServicesNewHomeBuildRoute
+  '/services/remodeling': typeof ServicesRemodelingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/partners': typeof PartnersRoute
+  '/portfolio': typeof PortfolioRoute
+  '/process': typeof ProcessRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/services/commercial': typeof ServicesCommercialRoute
+  '/services/home-additions': typeof ServicesHomeAdditionsRoute
+  '/services/new-home-build': typeof ServicesNewHomeBuildRoute
+  '/services/remodeling': typeof ServicesRemodelingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/partners': typeof PartnersRoute
+  '/portfolio': typeof PortfolioRoute
+  '/process': typeof ProcessRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/services/commercial': typeof ServicesCommercialRoute
+  '/services/home-additions': typeof ServicesHomeAdditionsRoute
+  '/services/new-home-build': typeof ServicesNewHomeBuildRoute
+  '/services/remodeling': typeof ServicesRemodelingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/partners'
+    | '/portfolio'
+    | '/process'
+    | '/services'
+    | '/services/commercial'
+    | '/services/home-additions'
+    | '/services/new-home-build'
+    | '/services/remodeling'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/partners'
+    | '/portfolio'
+    | '/process'
+    | '/services'
+    | '/services/commercial'
+    | '/services/home-additions'
+    | '/services/new-home-build'
+    | '/services/remodeling'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/partners'
+    | '/portfolio'
+    | '/process'
+    | '/services'
+    | '/services/commercial'
+    | '/services/home-additions'
+    | '/services/new-home-build'
+    | '/services/remodeling'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  PartnersRoute: typeof PartnersRoute
+  PortfolioRoute: typeof PortfolioRoute
+  ProcessRoute: typeof ProcessRoute
+  ServicesRoute: typeof ServicesRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/process': {
+      id: '/process'
+      path: '/process'
+      fullPath: '/process'
+      preLoaderRoute: typeof ProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio': {
+      id: '/portfolio'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof PortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partners': {
+      id: '/partners'
+      path: '/partners'
+      fullPath: '/partners'
+      preLoaderRoute: typeof PartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +200,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/remodeling': {
+      id: '/services/remodeling'
+      path: '/remodeling'
+      fullPath: '/services/remodeling'
+      preLoaderRoute: typeof ServicesRemodelingRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/new-home-build': {
+      id: '/services/new-home-build'
+      path: '/new-home-build'
+      fullPath: '/services/new-home-build'
+      preLoaderRoute: typeof ServicesNewHomeBuildRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/home-additions': {
+      id: '/services/home-additions'
+      path: '/home-additions'
+      fullPath: '/services/home-additions'
+      preLoaderRoute: typeof ServicesHomeAdditionsRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/commercial': {
+      id: '/services/commercial'
+      path: '/commercial'
+      fullPath: '/services/commercial'
+      preLoaderRoute: typeof ServicesCommercialRouteImport
+      parentRoute: typeof ServicesRoute
+    }
   }
 }
 
+interface ServicesRouteChildren {
+  ServicesCommercialRoute: typeof ServicesCommercialRoute
+  ServicesHomeAdditionsRoute: typeof ServicesHomeAdditionsRoute
+  ServicesNewHomeBuildRoute: typeof ServicesNewHomeBuildRoute
+  ServicesRemodelingRoute: typeof ServicesRemodelingRoute
+}
+
+const ServicesRouteChildren: ServicesRouteChildren = {
+  ServicesCommercialRoute: ServicesCommercialRoute,
+  ServicesHomeAdditionsRoute: ServicesHomeAdditionsRoute,
+  ServicesNewHomeBuildRoute: ServicesNewHomeBuildRoute,
+  ServicesRemodelingRoute: ServicesRemodelingRoute,
+}
+
+const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
+  ServicesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  PartnersRoute: PartnersRoute,
+  PortfolioRoute: PortfolioRoute,
+  ProcessRoute: ProcessRoute,
+  ServicesRoute: ServicesRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
