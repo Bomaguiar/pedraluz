@@ -9,38 +9,284 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as ProcessRouteImport } from './routes/process'
+import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as PartnersRouteImport } from './routes/partners'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as ServicesRemodelingRouteImport } from './routes/services.remodeling'
+import { Route as ServicesNewHomeBuildRouteImport } from './routes/services.new-home-build'
+import { Route as ServicesHomeAdditionsRouteImport } from './routes/services.home-additions'
+import { Route as ServicesCommercialRouteImport } from './routes/services.commercial'
+import { Route as DashboardProjectsRouteImport } from './routes/dashboard.projects'
+import { Route as DashboardClientsRouteImport } from './routes/dashboard.clients'
 
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProcessRoute = ProcessRouteImport.update({
+  id: '/process',
+  path: '/process',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioRoute = PortfolioRouteImport.update({
+  id: '/portfolio',
+  path: '/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnersRoute = PartnersRouteImport.update({
+  id: '/partners',
+  path: '/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const ServicesRemodelingRoute = ServicesRemodelingRouteImport.update({
+  id: '/remodeling',
+  path: '/remodeling',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesNewHomeBuildRoute = ServicesNewHomeBuildRouteImport.update({
+  id: '/new-home-build',
+  path: '/new-home-build',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesHomeAdditionsRoute = ServicesHomeAdditionsRouteImport.update({
+  id: '/home-additions',
+  path: '/home-additions',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesCommercialRoute = ServicesCommercialRouteImport.update({
+  id: '/commercial',
+  path: '/commercial',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const DashboardProjectsRoute = DashboardProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardClientsRoute = DashboardClientsRouteImport.update({
+  id: '/clients',
+  path: '/clients',
+  getParentRoute: () => DashboardRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/partners': typeof PartnersRoute
+  '/portfolio': typeof PortfolioRoute
+  '/process': typeof ProcessRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/dashboard/clients': typeof DashboardClientsRoute
+  '/dashboard/projects': typeof DashboardProjectsRoute
+  '/services/commercial': typeof ServicesCommercialRoute
+  '/services/home-additions': typeof ServicesHomeAdditionsRoute
+  '/services/new-home-build': typeof ServicesNewHomeBuildRoute
+  '/services/remodeling': typeof ServicesRemodelingRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
+  '/partners': typeof PartnersRoute
+  '/portfolio': typeof PortfolioRoute
+  '/process': typeof ProcessRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/dashboard/clients': typeof DashboardClientsRoute
+  '/dashboard/projects': typeof DashboardProjectsRoute
+  '/services/commercial': typeof ServicesCommercialRoute
+  '/services/home-additions': typeof ServicesHomeAdditionsRoute
+  '/services/new-home-build': typeof ServicesNewHomeBuildRoute
+  '/services/remodeling': typeof ServicesRemodelingRoute
+  '/dashboard': typeof DashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/partners': typeof PartnersRoute
+  '/portfolio': typeof PortfolioRoute
+  '/process': typeof ProcessRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/dashboard/clients': typeof DashboardClientsRoute
+  '/dashboard/projects': typeof DashboardProjectsRoute
+  '/services/commercial': typeof ServicesCommercialRoute
+  '/services/home-additions': typeof ServicesHomeAdditionsRoute
+  '/services/new-home-build': typeof ServicesNewHomeBuildRoute
+  '/services/remodeling': typeof ServicesRemodelingRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/auth'
+    | '/contact'
+    | '/dashboard'
+    | '/partners'
+    | '/portfolio'
+    | '/process'
+    | '/services'
+    | '/dashboard/clients'
+    | '/dashboard/projects'
+    | '/services/commercial'
+    | '/services/home-additions'
+    | '/services/new-home-build'
+    | '/services/remodeling'
+    | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/auth'
+    | '/contact'
+    | '/partners'
+    | '/portfolio'
+    | '/process'
+    | '/services'
+    | '/dashboard/clients'
+    | '/dashboard/projects'
+    | '/services/commercial'
+    | '/services/home-additions'
+    | '/services/new-home-build'
+    | '/services/remodeling'
+    | '/dashboard'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/auth'
+    | '/contact'
+    | '/dashboard'
+    | '/partners'
+    | '/portfolio'
+    | '/process'
+    | '/services'
+    | '/dashboard/clients'
+    | '/dashboard/projects'
+    | '/services/commercial'
+    | '/services/home-additions'
+    | '/services/new-home-build'
+    | '/services/remodeling'
+    | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AuthRoute: typeof AuthRoute
+  ContactRoute: typeof ContactRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
+  PartnersRoute: typeof PartnersRoute
+  PortfolioRoute: typeof PortfolioRoute
+  ProcessRoute: typeof ProcessRoute
+  ServicesRoute: typeof ServicesRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/process': {
+      id: '/process'
+      path: '/process'
+      fullPath: '/process'
+      preLoaderRoute: typeof ProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio': {
+      id: '/portfolio'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof PortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partners': {
+      id: '/partners'
+      path: '/partners'
+      fullPath: '/partners'
+      preLoaderRoute: typeof PartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,21 +294,103 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/services/remodeling': {
+      id: '/services/remodeling'
+      path: '/remodeling'
+      fullPath: '/services/remodeling'
+      preLoaderRoute: typeof ServicesRemodelingRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/new-home-build': {
+      id: '/services/new-home-build'
+      path: '/new-home-build'
+      fullPath: '/services/new-home-build'
+      preLoaderRoute: typeof ServicesNewHomeBuildRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/home-additions': {
+      id: '/services/home-additions'
+      path: '/home-additions'
+      fullPath: '/services/home-additions'
+      preLoaderRoute: typeof ServicesHomeAdditionsRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/commercial': {
+      id: '/services/commercial'
+      path: '/commercial'
+      fullPath: '/services/commercial'
+      preLoaderRoute: typeof ServicesCommercialRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/dashboard/projects': {
+      id: '/dashboard/projects'
+      path: '/projects'
+      fullPath: '/dashboard/projects'
+      preLoaderRoute: typeof DashboardProjectsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/clients': {
+      id: '/dashboard/clients'
+      path: '/clients'
+      fullPath: '/dashboard/clients'
+      preLoaderRoute: typeof DashboardClientsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
   }
 }
 
+interface DashboardRouteChildren {
+  DashboardClientsRoute: typeof DashboardClientsRoute
+  DashboardProjectsRoute: typeof DashboardProjectsRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardClientsRoute: DashboardClientsRoute,
+  DashboardProjectsRoute: DashboardProjectsRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
+interface ServicesRouteChildren {
+  ServicesCommercialRoute: typeof ServicesCommercialRoute
+  ServicesHomeAdditionsRoute: typeof ServicesHomeAdditionsRoute
+  ServicesNewHomeBuildRoute: typeof ServicesNewHomeBuildRoute
+  ServicesRemodelingRoute: typeof ServicesRemodelingRoute
+}
+
+const ServicesRouteChildren: ServicesRouteChildren = {
+  ServicesCommercialRoute: ServicesCommercialRoute,
+  ServicesHomeAdditionsRoute: ServicesHomeAdditionsRoute,
+  ServicesNewHomeBuildRoute: ServicesNewHomeBuildRoute,
+  ServicesRemodelingRoute: ServicesRemodelingRoute,
+}
+
+const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
+  ServicesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AuthRoute: AuthRoute,
+  ContactRoute: ContactRoute,
+  DashboardRoute: DashboardRouteWithChildren,
+  PartnersRoute: PartnersRoute,
+  PortfolioRoute: PortfolioRoute,
+  ProcessRoute: ProcessRoute,
+  ServicesRoute: ServicesRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
