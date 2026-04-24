@@ -55,7 +55,7 @@ export function SiteHeader({ overHero = false }: { overHero?: boolean }) {
             PEDRO & LUZ
           </Link>
 
-          <nav className="hidden items-center gap-10 md:flex">
+          <nav className="hidden items-center gap-8 md:flex lg:gap-10">
             {NAV.map((item) => (
               <Link
                 key={item.to}
@@ -68,7 +68,7 @@ export function SiteHeader({ overHero = false }: { overHero?: boolean }) {
             ))}
           </nav>
 
-          <div className="hidden items-center gap-6 md:flex">
+          <div className="hidden items-center gap-6 md:flex md:ml-8 lg:ml-12">
             <LanguageSwitcher tone="light" />
             <Link
               to="/contact"
