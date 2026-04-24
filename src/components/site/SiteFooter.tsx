@@ -9,7 +9,7 @@ export function SiteFooter() {
       <div className="container-edge py-20">
         <div className="grid gap-12 md:grid-cols-4">
           <div className="md:col-span-1">
-            <div className="font-display text-2xl tracking-[0.25em]">BOURIM</div>
+            <div className="font-display text-2xl tracking-[0.25em]">PEDRO & LUZ</div>
             <p className="mt-4 max-w-xs text-sm text-white/60">
               Architecture engineered for tomorrow. Licensed California architect.
               Lisbon · California · International.
@@ -40,7 +40,7 @@ export function SiteFooter() {
           <div>
             <p className="heading-section text-white/40">Contact</p>
             <ul className="mt-5 space-y-3 text-sm text-white/70">
-              <li>hello@bourim.com</li>
+              <li>hello@pedroeluz.com</li>
               <li>Lisbon, Portugal</li>
               <li>Greater Palm Springs, California</li>
               <li><Link to="/contact" className="text-[var(--brass)] hover:text-white">Request Consultation →</Link></li>
@@ -49,7 +49,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/40 md:flex-row">
-          <p>© {new Date().getFullYear()} Bourim Architecture Studio · Licensed California Architect · All Rights Reserved</p>
+          <p>© {new Date().getFullYear()} Pedro & Luz · Licensed California Architect · All Rights Reserved</p>
           <p className="label-tag text-white/30">Lisbon · California · International</p>
         </div>
       </div>

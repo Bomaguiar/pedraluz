@@ -15,13 +15,13 @@ import franciscoImg from "@/assets/team-francisco.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Bourim Architecture Studio — Architecture Built for the Way You Live" },
+      { title: "Pedro & Luz — Architecture Built for the Way You Live" },
       {
         name: "description",
         content:
           "Licensed California architect with offices in Lisbon and California. Precision-engineered residential, commercial and transformation projects.",
       },
-      { property: "og:title", content: "Bourim Architecture Studio" },
+      { property: "og:title", content: "Pedro & Luz" },
       {
         property: "og:description",
         content: "Architecture engineered for tomorrow. Lisbon · California · International.",
@@ -70,7 +70,7 @@ const PROCESS = [
 
 const TEAM = [
   {
-    name: "Ilya Bourim",
+    name: "Ilya Pedro & Luz",
     role: "Licensed California Architect",
     bio: "Registered in CA, NY + multiple U.S. states. SCI-Arc graduate. Former designer at RoTo Architects under Michael Rotondi.",
     img: ilyaImg,

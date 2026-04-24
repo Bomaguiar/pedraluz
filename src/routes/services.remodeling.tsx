@@ -5,9 +5,9 @@ import img from "@/assets/service-remodel.jpg";
 export const Route = createFileRoute("/services/remodeling")({
   head: () => ({
     meta: [
-      { title: "Remodeling — Bourim Architecture Studio" },
+      { title: "Remodeling — Pedro & Luz" },
       { name: "description", content: "Whole-home remodels and interior transformations that honor original structure." },
-      { property: "og:title", content: "Remodeling — Bourim Architecture Studio" },
+      { property: "og:title", content: "Remodeling — Pedro & Luz" },
       { property: "og:description", content: "Transformations that honor the bones and rewrite the experience." },
       { property: "og:image", content: img },
     ],

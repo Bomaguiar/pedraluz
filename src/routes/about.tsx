@@ -9,9 +9,9 @@ import heroImg from "@/assets/hero-architecture.jpg";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Bourim Architecture Studio" },
+      { title: "About — Pedro & Luz" },
       { name: "description", content: "An international architecture and construction studio with offices in Lisbon and California." },
-      { property: "og:title", content: "About — Bourim Architecture Studio" },
+      { property: "og:title", content: "About — Pedro & Luz" },
       { property: "og:description", content: "Three partners. Two continents. One way of working." },
       { property: "og:image", content: heroImg },
     ],
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/about")({
 
 const TEAM = [
   {
-    name: "Ilya Bourim",
+    name: "Ilya Pedro & Luz",
     role: "Lead Architect",
     img: ilyaImg,
     bio: "Licensed California Architect, registered in CA, NY, and multiple U.S. states. Graduate of SCI-Arc. Former designer at RoTo Architects under Michael Rotondi. Expert in BIM, parametric design, SIP construction, luxury residential, and large-scale commercial. Splits time between Lisbon and Greater Palm Springs.",
