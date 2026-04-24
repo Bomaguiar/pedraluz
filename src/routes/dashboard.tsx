@@ -50,7 +50,7 @@ function DashboardLayout() {
         className="flex w-64 shrink-0 flex-col text-white"
         style={{ backgroundColor: "var(--surface-darker)" }}
       >
-        <Link to="/" className="font-display border-b border-white/10 p-6 text-xl tracking-[0.25em]">
+        <Link to="/" className="font-display border-b border-white/10 p-6 text-xl tracking-[0.25em] text-[var(--brass)]">
           PEDRO & LUZ
         </Link>
         <p className="label-tag px-6 pt-6 text-white/40">Studio</p>

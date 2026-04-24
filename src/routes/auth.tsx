@@ -50,7 +50,7 @@ function AuthPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="w-full max-w-md">
-        <Link to="/" className="font-display block text-center text-2xl tracking-[0.25em] text-foreground">
+        <Link to="/" className="font-display block text-center text-2xl tracking-[0.25em] text-[var(--brass-dark)]">
           PEDRO & LUZ
         </Link>
         <p className="label-tag mt-2 text-center text-muted-foreground">Studio Dashboard</p>
