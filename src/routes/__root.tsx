@@ -1,6 +1,7 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
+import { LanguageProvider } from "@/i18n/LanguageProvider";
 import appCss from "../styles.css?url";
 
 const queryClient = new QueryClient({
@@ -87,8 +88,10 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
-      <Toaster position="bottom-right" />
+      <LanguageProvider>
+        <Outlet />
+        <Toaster position="bottom-right" />
+      </LanguageProvider>
     </QueryClientProvider>
   );
 }
