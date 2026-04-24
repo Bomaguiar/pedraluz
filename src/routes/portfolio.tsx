@@ -13,9 +13,9 @@ import featuredImg from "@/assets/featured-project.jpg";
 export const Route = createFileRoute("/portfolio")({
   head: () => ({
     meta: [
-      { title: "Portfolio — Bourim Architecture Studio" },
+      { title: "Portfolio — Pedro & Luz" },
       { name: "description", content: "Selected residential, commercial, and addition projects across Portugal and California." },
-      { property: "og:title", content: "Portfolio — Bourim Architecture Studio" },
+      { property: "og:title", content: "Portfolio — Pedro & Luz" },
       { property: "og:description", content: "Selected projects across residential, commercial, addition, and remodel." },
       { property: "og:image", content: featuredImg },
     ],

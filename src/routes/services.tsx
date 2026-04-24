@@ -10,13 +10,13 @@ import commercialImg from "@/assets/service-commercial.jpg";
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Services — Bourim Architecture Studio" },
+      { title: "Services — Pedro & Luz" },
       {
         name: "description",
         content:
           "New home build, remodeling, additions, and commercial architecture. Four disciplines, delivered with precision.",
       },
-      { property: "og:title", content: "Services — Bourim Architecture Studio" },
+      { property: "og:title", content: "Services — Pedro & Luz" },
       {
         property: "og:description",
         content: "Residential, additions, remodeling, and commercial architecture.",

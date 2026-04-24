@@ -6,9 +6,9 @@ import partnerImg from "@/assets/partner-roto.jpg";
 export const Route = createFileRoute("/partners")({
   head: () => ({
     meta: [
-      { title: "Partners — Bourim Architecture Studio" },
+      { title: "Partners — Pedro & Luz" },
       { name: "description", content: "Our strategic partnership with RoTo Architects (Los Angeles) and the studio team." },
-      { property: "og:title", content: "Partners — Bourim Architecture Studio" },
+      { property: "og:title", content: "Partners — Pedro & Luz" },
       { property: "og:description", content: "Global expertise. Local precision. Strategic partnership with RoTo Architects." },
       { property: "og:image", content: partnerImg },
     ],
@@ -49,7 +49,7 @@ function PartnersPage() {
                 RoTo operates at the intersection of art, technology, and human
                 experience, producing work of international significance. Our
                 collaboration brings American design innovation and global reach
-                to every Bourim project.
+                to every Pedro & Luz project.
               </p>
             </div>
 

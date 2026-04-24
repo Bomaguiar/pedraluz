@@ -5,9 +5,9 @@ import img from "@/assets/service-newhome.jpg";
 export const Route = createFileRoute("/services/new-home-build")({
   head: () => ({
     meta: [
-      { title: "New Home Build — Bourim Architecture Studio" },
+      { title: "New Home Build — Pedro & Luz" },
       { name: "description", content: "Ground-up residential architecture engineered to site, climate, and life." },
-      { property: "og:title", content: "New Home Build — Bourim Architecture Studio" },
+      { property: "og:title", content: "New Home Build — Pedro & Luz" },
       { property: "og:description", content: "Custom residential architecture from concept to completion." },
       { property: "og:image", content: img },
     ],

@@ -9,9 +9,9 @@ import heroImg from "@/assets/hero-architecture.jpg";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Bourim Architecture Studio" },
+      { title: "About — Pedro & Luz" },
       { name: "description", content: "An international architecture and construction studio with offices in Lisbon and California." },
-      { property: "og:title", content: "About — Bourim Architecture Studio" },
+      { property: "og:title", content: "About — Pedro & Luz" },
       { property: "og:description", content: "Three partners. Two continents. One way of working." },
       { property: "og:image", content: heroImg },
     ],
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/about")({
 
 const TEAM = [
   {
-    name: "Ilya Bourim",
+    name: "Ilya Pedro & Luz",
     role: "Lead Architect",
     img: ilyaImg,
     bio: "Licensed California Architect, registered in CA, NY, and multiple U.S. states. Graduate of SCI-Arc. Former designer at RoTo Architects under Michael Rotondi. Expert in BIM, parametric design, SIP construction, luxury residential, and large-scale commercial. Splits time between Lisbon and Greater Palm Springs.",
@@ -33,10 +33,10 @@ const TEAM = [
     bio: "14+ years in technology spanning gaming, blockchain, and digital infrastructure. Co-founder of Gamebau and operator across multiple international ventures. Architects the operational backbone — AI integrations, project management systems, and the digital infrastructure that lets the studio run faster than a traditional practice.",
   },
   {
-    name: "Francisco Gonzalez",
-    role: "Project Architect",
+    name: "Francisco Manani",
+    role: "Lead Constructor",
     img: franciscoImg,
-    bio: "Experienced architecture and construction professional. Brings deep technical expertise in project delivery, construction administration, and design execution — bridging design intent with on-site reality.",
+    bio: "Over 20 years of construction experience across more than 6 countries — from full renovations to ground-up builds. Leads on-site execution, contractor coordination, and quality control, ensuring every project is delivered to specification, on schedule, and on budget.",
   },
 ];
 

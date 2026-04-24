@@ -5,7 +5,7 @@ import type { Session } from "@supabase/supabase-js";
 import { LayoutDashboard, Users, Kanban, LogOut, Loader2 } from "lucide-react";
 
 export const Route = createFileRoute("/dashboard")({
-  head: () => ({ meta: [{ title: "Studio Dashboard — Bourim" }] }),
+  head: () => ({ meta: [{ title: "Studio Dashboard — Pedro & Luz" }] }),
   component: DashboardLayout,
 });
 
@@ -51,7 +51,7 @@ function DashboardLayout() {
         style={{ backgroundColor: "var(--surface-darker)" }}
       >
         <Link to="/" className="font-display border-b border-white/10 p-6 text-xl tracking-[0.25em]">
-          BOURIM
+          PEDRO & LUZ
         </Link>
         <p className="label-tag px-6 pt-6 text-white/40">Studio</p>
 

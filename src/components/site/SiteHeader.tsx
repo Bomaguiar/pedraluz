@@ -46,9 +46,9 @@ export function SiteHeader({ overHero = false }: { overHero?: boolean }) {
           <Link
             to="/"
             className="font-display text-2xl tracking-[0.25em] text-white"
-            aria-label="Bourim home"
+            aria-label="Pedro & Luz home"
           >
-            BOURIM
+            PEDRO & LUZ
           </Link>
 
           <nav className="hidden items-center gap-10 md:flex">

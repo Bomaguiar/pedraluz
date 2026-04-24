@@ -9,9 +9,9 @@ import { Loader2, Mail, MapPin } from "lucide-react";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Bourim Architecture Studio" },
+      { title: "Contact — Pedro & Luz" },
       { name: "description", content: "Request a consultation. Initial conversations are complimentary." },
-      { property: "og:title", content: "Contact — Bourim Architecture Studio" },
+      { property: "og:title", content: "Contact — Pedro & Luz" },
       { property: "og:description", content: "Tell us about your project. We respond within one business day." },
     ],
   }),
@@ -65,7 +65,7 @@ function ContactPage() {
     setSubmitting(false);
 
     if (error) {
-      toast.error("Something went wrong. Please email us directly at hello@bourim.com");
+      toast.error("Something went wrong. Please email us directly at hello@pedroeluz.com");
       return;
     }
 
@@ -99,8 +99,8 @@ function ContactPage() {
                 <Mail className="mt-1 h-4 w-4 text-[var(--brass-dark)]" />
                 <div>
                   <p className="label-tag text-muted-foreground">Email</p>
-                  <a href="mailto:hello@bourim.com" className="text-base text-foreground hover:text-[var(--brass-dark)]">
-                    hello@bourim.com
+                  <a href="mailto:hello@pedroeluz.com" className="text-base text-foreground hover:text-[var(--brass-dark)]">
+                    hello@pedroeluz.com
                   </a>
                 </div>
               </div>
