@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { PageHero } from "@/components/site/PageHero";
+import { useLang } from "@/i18n/LanguageProvider";
 import ilyaImg from "@/assets/team-ilya.jpg";
 import pedroImg from "@/assets/team-pedro.jpg";
 import franciscoImg from "@/assets/team-francisco.jpg";
