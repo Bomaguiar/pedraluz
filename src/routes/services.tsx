@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { PageHero } from "@/components/site/PageHero";
 import { ArrowRight } from "lucide-react";
+import { useLang } from "@/i18n/LanguageProvider";
+import type { TranslationKey } from "@/i18n/translations";
 import newhomeImg from "@/assets/service-newhome.jpg";
 import remodelImg from "@/assets/service-remodel.jpg";
 import additionImg from "@/assets/service-addition.jpg";
@@ -26,20 +28,21 @@ export const Route = createFileRoute("/services")({
   component: ServicesPage,
 });
 
-const SERVICES = [
-  { slug: "new-home-build", title: "New Home Build", desc: "Ground-up residential design tuned to site, climate, and life.", img: newhomeImg },
-  { slug: "remodeling", title: "Remodeling", desc: "Transformations that honor the bones and rewrite the experience.", img: remodelImg },
-  { slug: "home-additions", title: "Home Additions", desc: "New volumes that read as one with the original structure.", img: additionImg },
-  { slug: "commercial", title: "Commercial", desc: "Restaurants, retail and workplaces designed to be lived in.", img: commercialImg },
+const SERVICES: { slug: string; titleKey: TranslationKey; descKey: TranslationKey; img: string }[] = [
+  { slug: "new-home-build", titleKey: "svc.newhome.t", descKey: "svc.newhome.d", img: newhomeImg },
+  { slug: "remodeling", titleKey: "svc.remodel.t", descKey: "svc.remodel.d", img: remodelImg },
+  { slug: "home-additions", titleKey: "svc.addition.t", descKey: "svc.addition.d", img: additionImg },
+  { slug: "commercial", titleKey: "svc.commercial.t", descKey: "svc.commercial.d", img: commercialImg },
 ];
 
 function ServicesPage() {
+  const { t } = useLang();
   return (
     <SiteLayout overHero>
       <PageHero
-        label="Services"
-        title="Four disciplines. One studio."
-        subtitle="From ground-up homes to commercial fit-outs — we work where design demands precision."
+        label={t("nav.services")}
+        title={t("services.hero.title")}
+        subtitle={t("services.hero.subtitle")}
         image={newhomeImg}
       />
       <section className="container-edge py-24">
@@ -50,14 +53,14 @@ function ServicesPage() {
               to={`/services/${s.slug}` as string}
               className="group relative block aspect-[4/3] overflow-hidden"
             >
-              <img src={s.img} alt={s.title} loading="lazy"
+              <img src={s.img} alt={t(s.titleKey)} loading="lazy"
                 className="img-warm absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
               <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(26,26,24,0) 30%, rgba(26,26,24,0.85) 100%)" }} />
               <div className="absolute inset-x-0 bottom-0 p-8 text-white">
-                <h2 className="font-display text-3xl md:text-4xl">{s.title}</h2>
-                <p className="mt-2 max-w-sm text-sm text-white/75">{s.desc}</p>
+                <h2 className="font-display text-3xl md:text-4xl">{t(s.titleKey)}</h2>
+                <p className="mt-2 max-w-sm text-sm text-white/75">{t(s.descKey)}</p>
                 <span className="mt-4 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-[var(--brass)]">
-                  Explore <ArrowRight className="h-3 w-3" />
+                  {t("cta.exploreService")} <ArrowRight className="h-3 w-3" />
                 </span>
               </div>
             </Link>
@@ -67,3 +70,4 @@ function ServicesPage() {
     </SiteLayout>
   );
 }
+

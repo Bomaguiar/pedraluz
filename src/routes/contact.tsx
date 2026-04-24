@@ -5,6 +5,7 @@ import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Loader2, Mail, MapPin } from "lucide-react";
+import { useLang } from "@/i18n/LanguageProvider";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -31,6 +32,7 @@ const SERVICES = ["New Home Build", "Remodeling", "Home Addition", "Commercial",
 const BUDGETS = ["< €100K", "€100K – €500K", "€500K – €1.5M", "€1.5M – €5M", "€5M+"];
 
 function ContactPage() {
+  const { t } = useLang();
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
 
@@ -70,16 +72,16 @@ function ContactPage() {
     }
 
     setDone(true);
-    toast.success("Message received. We'll be in touch within one business day.");
+    toast.success(t("contact.toast.success"));
   }
 
   return (
     <SiteLayout overHero>
       <section className="pt-32" style={{ backgroundColor: "var(--surface-darker)" }}>
         <div className="container-edge py-24 text-white">
-          <p className="label-tag text-[var(--brass)]">Begin</p>
+          <p className="label-tag text-[var(--brass)]">{t("contact.hero.eyebrow")}</p>
           <h1 className="font-display mt-5 max-w-3xl text-5xl leading-tight md:text-7xl">
-            Tell us about your project.
+            {t("contact.hero.title")}
           </h1>
         </div>
       </section>
@@ -87,18 +89,16 @@ function ContactPage() {
       <section className="container-edge py-24">
         <div className="grid gap-16 md:grid-cols-12">
           <div className="md:col-span-5">
-            <p className="heading-section text-[var(--brass-dark)]">Studio</p>
+            <p className="heading-section text-[var(--brass-dark)]">{t("contact.studio")}</p>
             <p className="mt-6 text-base leading-relaxed text-foreground">
-              Initial consultations are complimentary. We respond within one business
-              day. For active project inquiries, attach a brief or share a few
-              reference images — it helps us prepare.
+              {t("contact.body")}
             </p>
 
             <div className="mt-12 space-y-6">
               <div className="flex items-start gap-4">
                 <Mail className="mt-1 h-4 w-4 text-[var(--brass-dark)]" />
                 <div>
-                  <p className="label-tag text-muted-foreground">Email</p>
+                  <p className="label-tag text-muted-foreground">{t("contact.email")}</p>
                   <a href="mailto:hello@pedroeluz.com" className="text-base text-foreground hover:text-[var(--brass-dark)]">
                     hello@pedroeluz.com
                   </a>
@@ -107,7 +107,7 @@ function ContactPage() {
               <div className="flex items-start gap-4">
                 <MapPin className="mt-1 h-4 w-4 text-[var(--brass-dark)]" />
                 <div>
-                  <p className="label-tag text-muted-foreground">Locations</p>
+                  <p className="label-tag text-muted-foreground">{t("contact.locations")}</p>
                   <p className="text-base text-foreground">Lisbon, Portugal</p>
                   <p className="text-base text-foreground">Greater Palm Springs, California</p>
                 </div>
@@ -118,31 +118,31 @@ function ContactPage() {
           <div className="md:col-span-7">
             {done ? (
               <div className="border border-border bg-card p-12 text-center">
-                <p className="label-tag text-[var(--brass-dark)]">Received</p>
-                <h2 className="font-display mt-4 text-3xl">Thank you.</h2>
+                <p className="label-tag text-[var(--brass-dark)]">{t("contact.success.eyebrow")}</p>
+                <h2 className="font-display mt-4 text-3xl">{t("contact.success.title")}</h2>
                 <p className="mt-4 text-muted-foreground">
-                  Your inquiry has been logged. A partner will reach out within one business day.
+                  {t("contact.success.body")}
                 </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid gap-6 sm:grid-cols-2">
-                  <Field label="Name" name="name" required />
-                  <Field label="Email" name="email" type="email" required />
+                  <Field label={t("contact.field.name")} name="name" required />
+                  <Field label={t("contact.field.email")} name="email" type="email" required />
                 </div>
                 <div className="grid gap-6 sm:grid-cols-2">
-                  <Field label="Phone" name="phone" />
-                  <SelectField label="Service" name="service_type" options={SERVICES} required />
+                  <Field label={t("contact.field.phone")} name="phone" />
+                  <SelectField label={t("contact.field.service")} name="service_type" options={SERVICES} required selectPlaceholder={t("contact.select")} />
                 </div>
-                <SelectField label="Budget Range" name="budget" options={BUDGETS} required />
+                <SelectField label={t("contact.field.budget")} name="budget" options={BUDGETS} required selectPlaceholder={t("contact.select")} />
                 <div>
-                  <label className="label-tag text-muted-foreground">Project Brief</label>
+                  <label className="label-tag text-muted-foreground">{t("contact.field.brief")}</label>
                   <textarea
                     name="notes"
                     rows={6}
                     required
                     className="mt-2 w-full border border-input bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-foreground"
-                    placeholder="Tell us about the site, the program, the timing, and what success looks like."
+                    placeholder={t("contact.field.briefPlaceholder")}
                   />
                 </div>
                 <button
@@ -151,7 +151,7 @@ function ContactPage() {
                   className="inline-flex items-center gap-3 bg-foreground px-8 py-4 text-[11px] uppercase tracking-[0.2em] text-background transition-colors hover:bg-[var(--brass-dark)] disabled:opacity-60"
                 >
                   {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
-                  Request Consultation
+                  {t("cta.requestConsultation")}
                 </button>
               </form>
             )}
@@ -176,7 +176,7 @@ function Field({ label, name, type = "text", required }: { label: string; name: 
   );
 }
 
-function SelectField({ label, name, options, required }: { label: string; name: string; options: string[]; required?: boolean }) {
+function SelectField({ label, name, options, required, selectPlaceholder }: { label: string; name: string; options: string[]; required?: boolean; selectPlaceholder: string }) {
   return (
     <div>
       <label className="label-tag text-muted-foreground">{label}{required && " *"}</label>
@@ -186,7 +186,7 @@ function SelectField({ label, name, options, required }: { label: string; name: 
         defaultValue=""
         className="mt-2 w-full border border-input bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-foreground"
       >
-        <option value="" disabled>Select…</option>
+        <option value="" disabled>{selectPlaceholder}</option>
         {options.map((o) => <option key={o} value={o}>{o}</option>)}
       </select>
     </div>

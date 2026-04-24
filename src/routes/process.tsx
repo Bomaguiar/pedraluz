@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { PageHero } from "@/components/site/PageHero";
 import { Sparkles } from "lucide-react";
+import { useLang } from "@/i18n/LanguageProvider";
+import type { TranslationKey } from "@/i18n/translations";
 import img from "@/assets/featured-project.jpg";
 
 export const Route = createFileRoute("/process")({
@@ -17,23 +19,24 @@ export const Route = createFileRoute("/process")({
   component: ProcessPage,
 });
 
-const STEPS = [
-  { n: "01", t: "Initial Consultation", d: "Understand your vision, budget, and requirements. We listen first.", ai: true, aiDesc: "AI summarizes meeting notes into a structured design brief in minutes, not days." },
-  { n: "02", t: "Site Analysis", d: "Assess topography, orientation, views, and constraints." },
-  { n: "03", t: "Design Development", d: "Collaborative sketching until you love the direction.", ai: true, aiDesc: "Generative tools produce 50+ massing studies overnight, expanding the option space dramatically." },
-  { n: "04", t: "Construction Documents", d: "Detailed specs: materials, finishes, dimensions.", ai: true, aiDesc: "Automated material take-offs and code-compliance checks compress documentation time." },
-  { n: "05", t: "Contractor Selection", d: "Curated shortlist or your own — we advise either way." },
-  { n: "06", t: "Construction Admin", d: "On-site oversight, schedule adherence, budget control." },
-  { n: "07", t: "Project Completion", d: "Final inspection, punch list, handover with pride." },
+const STEPS: { n: string; tKey: TranslationKey; dKey: TranslationKey; ai?: boolean }[] = [
+  { n: "01", tKey: "process.s1.t", dKey: "process.s1.d", ai: true },
+  { n: "02", tKey: "process.s2.t", dKey: "process.s2.d" },
+  { n: "03", tKey: "process.s3.t", dKey: "process.s3.d", ai: true },
+  { n: "04", tKey: "process.s4.t", dKey: "process.s4.d", ai: true },
+  { n: "05", tKey: "process.s5.t", dKey: "process.s5.d" },
+  { n: "06", tKey: "process.s6.t", dKey: "process.s6.d" },
+  { n: "07", tKey: "process.s7.t", dKey: "process.s7.d" },
 ];
 
 function ProcessPage() {
+  const { t } = useLang();
   return (
     <SiteLayout overHero>
       <PageHero
-        label="The Process"
-        title="Seven steps. Zero guesswork."
-        subtitle="A methodical pipeline from first conversation to handover. AI accelerates where it adds clarity — never where it dilutes craft."
+        label={t("nav.process")}
+        title={t("processPage.hero.title")}
+        subtitle={t("processPage.hero.subtitle")}
         image={img}
       />
 
@@ -51,20 +54,15 @@ function ProcessPage() {
                 </div>
               </div>
               <div className="md:col-span-4">
-                <h2 className="font-display text-3xl md:text-4xl">{s.t}</h2>
+                <h2 className="font-display text-3xl md:text-4xl">{t(s.tKey)}</h2>
                 {s.ai && (
                   <span className="mt-3 inline-flex items-center gap-1.5 border border-[var(--brass)]/50 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-[var(--brass-dark)]">
-                    <Sparkles className="h-3 w-3" /> AI-Assisted
+                    <Sparkles className="h-3 w-3" /> {t("process.aiBadge")}
                   </span>
                 )}
               </div>
               <div className="md:col-span-6">
-                <p className="text-base leading-relaxed text-foreground">{s.d}</p>
-                {s.aiDesc && (
-                  <p className="mt-4 border-l-2 border-[var(--brass)] pl-4 text-sm text-muted-foreground">
-                    {s.aiDesc}
-                  </p>
-                )}
+                <p className="text-base leading-relaxed text-foreground">{t(s.dKey)}</p>
               </div>
             </div>
           ))}
@@ -73,3 +71,4 @@ function ProcessPage() {
     </SiteLayout>
   );
 }
+

@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { PageHero } from "@/components/site/PageHero";
+import { useLang } from "@/i18n/LanguageProvider";
 import partnerImg from "@/assets/partner-roto.jpg";
 
 export const Route = createFileRoute("/partners")({
@@ -17,12 +18,13 @@ export const Route = createFileRoute("/partners")({
 });
 
 function PartnersPage() {
+  const { t } = useLang();
   return (
     <SiteLayout overHero>
       <PageHero
-        label="Partners"
-        title="Global expertise. Local precision."
-        subtitle="Strategic partnerships extend our reach across continents while keeping every project tightly held by our studio."
+        label={t("nav.partners")}
+        title={t("partnersPage.hero.title")}
+        subtitle={t("partnersPage.hero.subtitle")}
         image={partnerImg}
       />
 
@@ -35,22 +37,12 @@ function PartnersPage() {
             </div>
           </div>
           <div className="md:col-span-5">
-            <p className="label-tag text-[var(--brass-dark)]">Strategic Partner</p>
+            <p className="label-tag text-[var(--brass-dark)]">{t("home.partner.label")}</p>
             <h2 className="font-display mt-4 text-4xl md:text-5xl">RoTo Architects</h2>
             <p className="label-tag mt-2 text-muted-foreground">Los Angeles, California · International</p>
 
             <div className="mt-8 space-y-5 text-base leading-relaxed text-muted-foreground">
-              <p>
-                Founded by Michael Rotondi — co-founder of SCI-Arc (Southern
-                California Institute of Architecture) — one of the most
-                influential architectural institutions in the world.
-              </p>
-              <p>
-                RoTo operates at the intersection of art, technology, and human
-                experience, producing work of international significance. Our
-                collaboration brings American design innovation and global reach
-                to every Pedro & Luz project.
-              </p>
+              <p>{t("home.partner.body")}</p>
             </div>
 
             <a
@@ -59,7 +51,7 @@ function PartnersPage() {
               rel="noopener noreferrer"
               className="mt-10 inline-flex items-center gap-2 border-b border-[var(--brass)] pb-1 text-[11px] uppercase tracking-[0.18em] text-[var(--brass-dark)] transition-colors hover:text-foreground"
             >
-              Visit RoTo Architects →
+              {t("partnersPage.visit")}
             </a>
           </div>
         </div>
@@ -68,17 +60,16 @@ function PartnersPage() {
       {/* Future partners */}
       <section className="border-t" style={{ backgroundColor: "var(--surface)" }}>
         <div className="container-edge py-24">
-          <p className="label-tag text-[var(--brass-dark)]">Studio Network</p>
+          <p className="label-tag text-[var(--brass-dark)]">{t("partnersPage.network.eyebrow")}</p>
           <h2 className="font-display mt-4 max-w-2xl text-3xl md:text-5xl">
-            A small network of studios we trust on every continent we work.
+            {t("partnersPage.network.title")}
           </h2>
           <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            We collaborate with structural engineers, landscape architects, lighting
-            consultants, and contractors across Europe and the Americas. Partner
-            studios are added carefully — we'd rather work with fewer people, longer.
+            {t("partnersPage.network.body")}
           </p>
         </div>
       </section>
     </SiteLayout>
   );
 }
+
