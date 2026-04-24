@@ -33,10 +33,10 @@ const TEAM = [
     bio: "14+ years in technology spanning gaming, blockchain, and digital infrastructure. Co-founder of Gamebau and operator across multiple international ventures. Architects the operational backbone — AI integrations, project management systems, and the digital infrastructure that lets the studio run faster than a traditional practice.",
   },
   {
-    name: "Francisco Gonzalez",
-    role: "Project Architect",
+    name: "Francisco Manani",
+    role: "Lead Constructor",
     img: franciscoImg,
-    bio: "Experienced architecture and construction professional. Brings deep technical expertise in project delivery, construction administration, and design execution — bridging design intent with on-site reality.",
+    bio: "Over 20 years of construction experience across more than 6 countries — from full renovations to ground-up builds. Leads on-site execution, contractor coordination, and quality control, ensuring every project is delivered to specification, on schedule, and on budget.",
   },
 ];
 

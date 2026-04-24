@@ -82,9 +82,9 @@ const TEAM = [
     img: pedroImg,
   },
   {
-    name: "Francisco Gonzalez",
-    role: "Project Architect",
-    bio: "Deep expertise in construction administration and project delivery — bridging design intent with on-site reality.",
+    name: "Francisco Manani",
+    role: "Lead Constructor",
+    bio: "20+ years building across 6+ countries — from renovations to full ground-up construction. Owns on-site delivery end to end.",
     img: franciscoImg,
   },
 ];
