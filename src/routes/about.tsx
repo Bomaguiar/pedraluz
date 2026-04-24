@@ -21,7 +21,7 @@ export const Route = createFileRoute("/about")({
 
 const TEAM = [
   {
-    name: "Ilya Pedro & Luz",
+    name: "Ilya Bourim",
     role: "Lead Architect",
     img: ilyaImg,
     bio: "Licensed California Architect, registered in CA, NY, and multiple U.S. states. Graduate of SCI-Arc. Former designer at RoTo Architects under Michael Rotondi. Expert in BIM, parametric design, SIP construction, luxury residential, and large-scale commercial. Splits time between Lisbon and Greater Palm Springs.",
