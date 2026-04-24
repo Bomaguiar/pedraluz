@@ -11,7 +11,7 @@ export function SiteFooter() {
       <div className="container-edge py-20">
         <div className="grid gap-12 md:grid-cols-4">
           <div className="md:col-span-1">
-            <div className="font-display text-2xl tracking-[0.25em]">PEDRO & LUZ</div>
+            <div className="font-display text-2xl tracking-[0.25em] text-[var(--brass)]">PEDRO & LUZ</div>
             <p className="mt-4 max-w-xs text-sm text-white/60">{t("footer.tagline")}</p>
           </div>
 

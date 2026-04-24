@@ -49,7 +49,7 @@ export function SiteHeader({ overHero = false }: { overHero?: boolean }) {
         <div className="container-edge flex h-20 items-center justify-between">
           <Link
             to="/"
-            className="font-display text-2xl tracking-[0.25em] text-white"
+            className="font-display text-2xl tracking-[0.25em] text-[var(--brass)]"
             aria-label="Pedro & Luz home"
           >
             PEDRO & LUZ
