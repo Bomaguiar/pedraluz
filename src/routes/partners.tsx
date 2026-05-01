@@ -7,9 +7,9 @@ import partnerImg from "@/assets/partner-roto.jpg";
 export const Route = createFileRoute("/partners")({
   head: () => ({
     meta: [
-      { title: "Partners — Pedro & Luz" },
+      { title: "Partners — Pedra & Luz" },
       { name: "description", content: "Our strategic partnership with RoTo Architects (Los Angeles) and the studio team." },
-      { property: "og:title", content: "Partners — Pedro & Luz" },
+      { property: "og:title", content: "Partners — Pedra & Luz" },
       { property: "og:description", content: "Global expertise. Local precision. Strategic partnership with RoTo Architects." },
       { property: "og:image", content: partnerImg },
     ],

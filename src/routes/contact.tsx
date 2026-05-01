@@ -15,9 +15,9 @@ import { useLang } from "@/i18n/LanguageProvider";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Pedro & Luz" },
+      { title: "Contact — Pedra & Luz" },
       { name: "description", content: "Request a consultation. Initial conversations are complimentary." },
-      { property: "og:title", content: "Contact — Pedro & Luz" },
+      { property: "og:title", content: "Contact — Pedra & Luz" },
       { property: "og:description", content: "Tell us about your project. We respond within one business day." },
     ],
   }),

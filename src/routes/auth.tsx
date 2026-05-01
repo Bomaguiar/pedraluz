@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 
 export const Route = createFileRoute("/auth")({
-  head: () => ({ meta: [{ title: "Studio Sign In — Pedro & Luz" }] }),
+  head: () => ({ meta: [{ title: "Studio Sign In — Pedra & Luz" }] }),
   component: AuthPage,
 });
 
@@ -51,7 +51,7 @@ function AuthPage() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="w-full max-w-md">
         <Link to="/" className="font-display block text-center text-2xl tracking-[0.25em] text-[var(--brass-dark)]">
-          PEDRO & LUZ
+          PEDRA & LUZ
         </Link>
         <p className="label-tag mt-2 text-center text-muted-foreground">Studio Dashboard</p>
 

@@ -5,9 +5,9 @@ import img from "@/assets/service-commercial.jpg";
 export const Route = createFileRoute("/services/commercial")({
   head: () => ({
     meta: [
-      { title: "Commercial — Pedro & Luz" },
+      { title: "Commercial — Pedra & Luz" },
       { name: "description", content: "Restaurants, retail, and workplaces designed for atmosphere and operation." },
-      { property: "og:title", content: "Commercial — Pedro & Luz" },
+      { property: "og:title", content: "Commercial — Pedra & Luz" },
       { property: "og:description", content: "Restaurants, retail and workplaces designed to be lived in." },
       { property: "og:image", content: img },
     ],
