@@ -17,13 +17,13 @@ import franciscoImg from "@/assets/team-francisco.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Pedro & Luz — Architecture Built for the Way You Live" },
+      { title: "Pedra & Luz — Architecture Built for the Way You Live" },
       {
         name: "description",
         content:
           "Licensed California architect with offices in Lisbon and California. Precision-engineered residential, commercial and transformation projects.",
       },
-      { property: "og:title", content: "Pedro & Luz" },
+      { property: "og:title", content: "Pedra & Luz" },
       {
         property: "og:description",
         content: "Architecture engineered for tomorrow. Lisbon · California · International.",

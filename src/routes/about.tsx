@@ -10,9 +10,9 @@ import heroImg from "@/assets/hero-architecture.jpg";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Pedro & Luz" },
+      { title: "About — Pedra & Luz" },
       { name: "description", content: "An international architecture and construction studio with offices in Lisbon and California." },
-      { property: "og:title", content: "About — Pedro & Luz" },
+      { property: "og:title", content: "About — Pedra & Luz" },
       { property: "og:description", content: "Three partners. Two continents. One way of working." },
       { property: "og:image", content: heroImg },
     ],

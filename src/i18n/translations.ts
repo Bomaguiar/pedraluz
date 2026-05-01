@@ -27,9 +27,9 @@ export const translations = {
   "footer.dashboard": { en: "Studio Dashboard", pt: "Painel do Estúdio", fr: "Tableau de bord" },
   "footer.requestConsult": { en: "Request Consultation →", pt: "Pedir Consulta →", fr: "Demander une consultation →" },
   "footer.rights": {
-    en: "Pedro & Luz · Licensed California Architect · All Rights Reserved",
-    pt: "Pedro & Luz · Arquiteto Licenciado na Califórnia · Todos os Direitos Reservados",
-    fr: "Pedro & Luz · Architecte Agréé en Californie · Tous Droits Réservés",
+    en: "Pedra & Luz · Licensed California Architect · All Rights Reserved",
+    pt: "Pedra & Luz · Arquiteto Licenciado na Califórnia · Todos os Direitos Reservados",
+    fr: "Pedra & Luz · Architecte Agréé en Californie · Tous Droits Réservés",
   },
   "footer.locations": {
     en: "Lisbon · California · International",

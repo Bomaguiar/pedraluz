@@ -12,13 +12,13 @@ import commercialImg from "@/assets/service-commercial.jpg";
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Services — Pedro & Luz" },
+      { title: "Services — Pedra & Luz" },
       {
         name: "description",
         content:
           "New home build, remodeling, additions, and commercial architecture. Four disciplines, delivered with precision.",
       },
-      { property: "og:title", content: "Services — Pedro & Luz" },
+      { property: "og:title", content: "Services — Pedra & Luz" },
       {
         property: "og:description",
         content: "Residential, additions, remodeling, and commercial architecture.",

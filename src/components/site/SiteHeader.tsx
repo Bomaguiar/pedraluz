@@ -50,9 +50,9 @@ export function SiteHeader({ overHero = false }: { overHero?: boolean }) {
           <Link
             to="/"
             className="font-display text-2xl tracking-[0.25em] text-[var(--brass)]"
-            aria-label="Pedro & Luz home"
+            aria-label="Pedra & Luz home"
           >
-            PEDRO & LUZ
+            PEDRA & LUZ
           </Link>
 
           <nav className="hidden items-center gap-8 md:flex lg:gap-10">

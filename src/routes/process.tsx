@@ -9,9 +9,9 @@ import img from "@/assets/featured-project.jpg";
 export const Route = createFileRoute("/process")({
   head: () => ({
     meta: [
-      { title: "The Process — Pedro & Luz" },
+      { title: "The Process — Pedra & Luz" },
       { name: "description", content: "Seven steps from initial consultation to project completion. Zero guesswork." },
-      { property: "og:title", content: "The Process — Pedro & Luz" },
+      { property: "og:title", content: "The Process — Pedra & Luz" },
       { property: "og:description", content: "Seven steps. Zero guesswork. AI-accelerated where it counts." },
       { property: "og:image", content: img },
     ],

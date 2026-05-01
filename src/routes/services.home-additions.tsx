@@ -5,9 +5,9 @@ import img from "@/assets/service-addition.jpg";
 export const Route = createFileRoute("/services/home-additions")({
   head: () => ({
     meta: [
-      { title: "Home Additions — Pedro & Luz" },
+      { title: "Home Additions — Pedra & Luz" },
       { name: "description", content: "Additions that integrate with — or deliberately contrast — the original structure." },
-      { property: "og:title", content: "Home Additions — Pedro & Luz" },
+      { property: "og:title", content: "Home Additions — Pedra & Luz" },
       { property: "og:description", content: "New volumes that read as one with the original structure." },
       { property: "og:image", content: img },
     ],
