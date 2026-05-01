@@ -4,7 +4,10 @@ import { useState } from "react";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Loader2, Mail, MapPin } from "lucide-react";
+import { Loader2, Mail, MapPin, Phone } from "lucide-react";
+
+const TIKTOK_URL = "https://www.tiktok.com/@lightstone_pt";
+const PHONE_NUMBER = "+351915873259";
 import { useLang } from "@/i18n/LanguageProvider";
 
 export const Route = createFileRoute("/contact")({
@@ -105,11 +108,31 @@ function ContactPage() {
                 </div>
               </div>
               <div className="flex items-start gap-4">
+                <Phone className="mt-1 h-4 w-4 text-[var(--brass-dark)]" />
+                <div>
+                  <p className="label-tag text-muted-foreground">{t("contact.phone") ?? "Phone"}</p>
+                  <a href={`tel:${PHONE_NUMBER}`} className="text-base text-foreground hover:text-[var(--brass-dark)]">
+                    {PHONE_NUMBER}
+                  </a>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
                 <MapPin className="mt-1 h-4 w-4 text-[var(--brass-dark)]" />
                 <div>
                   <p className="label-tag text-muted-foreground">{t("contact.locations")}</p>
                   <p className="text-base text-foreground">Lisbon, Portugal</p>
                   <p className="text-base text-foreground">Greater Palm Springs, California</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <svg className="mt-1 h-4 w-4 text-[var(--brass-dark)]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.34a8.16 8.16 0 0 0 4.77 1.52V6.41a4.85 4.85 0 0 1-1.84-.27z" />
+                </svg>
+                <div>
+                  <p className="label-tag text-muted-foreground">TikTok</p>
+                  <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" className="text-base text-foreground hover:text-[var(--brass-dark)]">
+                    @lightstone_pt
+                  </a>
                 </div>
               </div>
             </div>
