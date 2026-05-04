@@ -2,7 +2,7 @@ import { createFileRoute, Outlet, Link, useNavigate, useRouterState } from "@tan
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Session } from "@supabase/supabase-js";
-import { LayoutDashboard, Users, Kanban, LogOut, Loader2 } from "lucide-react";
+import { LayoutDashboard, Users, Kanban, LogOut, Loader2, Plug } from "lucide-react";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({ meta: [{ title: "Studio Dashboard — Pedra & Luz" }] }),
@@ -13,6 +13,7 @@ const NAV = [
   { to: "/dashboard", label: "Overview", icon: LayoutDashboard, exact: true },
   { to: "/dashboard/clients", label: "Clients", icon: Users, exact: false },
   { to: "/dashboard/projects", label: "Projects", icon: Kanban, exact: false },
+  { to: "/dashboard/clickup", label: "ClickUp", icon: Plug, exact: false },
 ];
 
 function DashboardLayout() {

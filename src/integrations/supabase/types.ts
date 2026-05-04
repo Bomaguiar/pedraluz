@@ -14,9 +14,79 @@ export type Database = {
   }
   public: {
     Tables: {
+      clickup_settings: {
+        Row: {
+          auto_sync: boolean
+          created_at: string
+          folder_id: string | null
+          id: string
+          space_id: string | null
+          updated_at: string
+          webhook_id: string | null
+          workspace_id: string
+        }
+        Insert: {
+          auto_sync?: boolean
+          created_at?: string
+          folder_id?: string | null
+          id?: string
+          space_id?: string | null
+          updated_at?: string
+          webhook_id?: string | null
+          workspace_id: string
+        }
+        Update: {
+          auto_sync?: boolean
+          created_at?: string
+          folder_id?: string | null
+          id?: string
+          space_id?: string | null
+          updated_at?: string
+          webhook_id?: string | null
+          workspace_id?: string
+        }
+        Relationships: []
+      }
+      clickup_sync_log: {
+        Row: {
+          clickup_id: string | null
+          created_at: string
+          direction: string
+          entity_id: string | null
+          entity_type: string
+          error: string | null
+          id: string
+          payload: Json | null
+          status: string
+        }
+        Insert: {
+          clickup_id?: string | null
+          created_at?: string
+          direction: string
+          entity_id?: string | null
+          entity_type: string
+          error?: string | null
+          id?: string
+          payload?: Json | null
+          status: string
+        }
+        Update: {
+          clickup_id?: string | null
+          created_at?: string
+          direction?: string
+          entity_id?: string | null
+          entity_type?: string
+          error?: string | null
+          id?: string
+          payload?: Json | null
+          status?: string
+        }
+        Relationships: []
+      }
       clients: {
         Row: {
           assigned_to: string | null
+          clickup_list_id: string | null
           company: string | null
           created_at: string
           created_by: string | null
@@ -32,6 +102,7 @@ export type Database = {
         }
         Insert: {
           assigned_to?: string | null
+          clickup_list_id?: string | null
           company?: string | null
           created_at?: string
           created_by?: string | null
@@ -47,6 +118,7 @@ export type Database = {
         }
         Update: {
           assigned_to?: string | null
+          clickup_list_id?: string | null
           company?: string | null
           created_at?: string
           created_by?: string | null
