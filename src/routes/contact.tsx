@@ -8,8 +8,8 @@ import { Loader2, Mail, MapPin, Phone } from "lucide-react";
 
 const TIKTOK_URL = "https://www.tiktok.com/@lightstone_pt";
 const PHONE_NUMBER = "+351915873259";
-const WHATSAPP_NUMBER = "+1 (760) 609-6731";
-const WHATSAPP_URL = "https://wa.me/17606096731";
+const WHATSAPP_NUMBER = "+351 936 661 128";
+const WHATSAPP_URL = "https://wa.me/351936661128";
 import { useLang } from "@/i18n/LanguageProvider";
 
 export const Route = createFileRoute("/contact")({
