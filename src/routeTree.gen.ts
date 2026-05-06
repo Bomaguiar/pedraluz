@@ -25,6 +25,7 @@ import { Route as ServicesRemodelingRouteImport } from './routes/services.remode
 import { Route as ServicesNewHomeBuildRouteImport } from './routes/services.new-home-build'
 import { Route as ServicesHomeAdditionsRouteImport } from './routes/services.home-additions'
 import { Route as ServicesCommercialRouteImport } from './routes/services.commercial'
+import { Route as PortalProjectIdRouteImport } from './routes/portal.$projectId'
 import { Route as DashboardProjectsRouteImport } from './routes/dashboard.projects'
 import { Route as DashboardClientsRouteImport } from './routes/dashboard.clients'
 import { Route as DashboardClickupRouteImport } from './routes/dashboard.clickup'
@@ -110,6 +111,11 @@ const ServicesCommercialRoute = ServicesCommercialRouteImport.update({
   path: '/commercial',
   getParentRoute: () => ServicesRoute,
 } as any)
+const PortalProjectIdRoute = PortalProjectIdRouteImport.update({
+  id: '/$projectId',
+  path: '/$projectId',
+  getParentRoute: () => PortalRoute,
+} as any)
 const DashboardProjectsRoute = DashboardProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
@@ -145,6 +151,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/clickup': typeof DashboardClickupRoute
   '/dashboard/clients': typeof DashboardClientsRoute
   '/dashboard/projects': typeof DashboardProjectsRoute
+  '/portal/$projectId': typeof PortalProjectIdRoute
   '/services/commercial': typeof ServicesCommercialRoute
   '/services/home-additions': typeof ServicesHomeAdditionsRoute
   '/services/new-home-build': typeof ServicesNewHomeBuildRoute
@@ -165,6 +172,7 @@ export interface FileRoutesByTo {
   '/dashboard/clickup': typeof DashboardClickupRoute
   '/dashboard/clients': typeof DashboardClientsRoute
   '/dashboard/projects': typeof DashboardProjectsRoute
+  '/portal/$projectId': typeof PortalProjectIdRoute
   '/services/commercial': typeof ServicesCommercialRoute
   '/services/home-additions': typeof ServicesHomeAdditionsRoute
   '/services/new-home-build': typeof ServicesNewHomeBuildRoute
@@ -188,6 +196,7 @@ export interface FileRoutesById {
   '/dashboard/clickup': typeof DashboardClickupRoute
   '/dashboard/clients': typeof DashboardClientsRoute
   '/dashboard/projects': typeof DashboardProjectsRoute
+  '/portal/$projectId': typeof PortalProjectIdRoute
   '/services/commercial': typeof ServicesCommercialRoute
   '/services/home-additions': typeof ServicesHomeAdditionsRoute
   '/services/new-home-build': typeof ServicesNewHomeBuildRoute
@@ -212,6 +221,7 @@ export interface FileRouteTypes {
     | '/dashboard/clickup'
     | '/dashboard/clients'
     | '/dashboard/projects'
+    | '/portal/$projectId'
     | '/services/commercial'
     | '/services/home-additions'
     | '/services/new-home-build'
@@ -232,6 +242,7 @@ export interface FileRouteTypes {
     | '/dashboard/clickup'
     | '/dashboard/clients'
     | '/dashboard/projects'
+    | '/portal/$projectId'
     | '/services/commercial'
     | '/services/home-additions'
     | '/services/new-home-build'
@@ -254,6 +265,7 @@ export interface FileRouteTypes {
     | '/dashboard/clickup'
     | '/dashboard/clients'
     | '/dashboard/projects'
+    | '/portal/$projectId'
     | '/services/commercial'
     | '/services/home-additions'
     | '/services/new-home-build'
@@ -391,6 +403,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesCommercialRouteImport
       parentRoute: typeof ServicesRoute
     }
+    '/portal/$projectId': {
+      id: '/portal/$projectId'
+      path: '/$projectId'
+      fullPath: '/portal/$projectId'
+      preLoaderRoute: typeof PortalProjectIdRouteImport
+      parentRoute: typeof PortalRoute
+    }
     '/dashboard/projects': {
       id: '/dashboard/projects'
       path: '/projects'
@@ -441,10 +460,12 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
 )
 
 interface PortalRouteChildren {
+  PortalProjectIdRoute: typeof PortalProjectIdRoute
   PortalIndexRoute: typeof PortalIndexRoute
 }
 
 const PortalRouteChildren: PortalRouteChildren = {
+  PortalProjectIdRoute: PortalProjectIdRoute,
   PortalIndexRoute: PortalIndexRoute,
 }
 
