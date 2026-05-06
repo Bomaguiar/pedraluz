@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
@@ -116,14 +116,16 @@ function ProjectsPage() {
                       onDragStart={() => setDraggingId(p.id)}
                       className="cursor-grab border border-border bg-card p-3 text-sm shadow-sm hover:shadow-md active:cursor-grabbing"
                     >
-                      <div className="font-medium text-foreground">{p.name}</div>
-                      {p.clients?.name && (
-                        <div className="mt-1 text-xs text-muted-foreground">{p.clients.name}</div>
-                      )}
-                      <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
-                        <span>{p.service_type ?? "—"}</span>
-                        <span>{p.estimated_value ? `€${Number(p.estimated_value).toLocaleString("en-US")}` : "—"}</span>
-                      </div>
+                      <Link to="/dashboard/projects/$projectId" params={{ projectId: p.id }} className="block">
+                        <div className="font-medium text-foreground hover:text-[var(--brass-dark)]">{p.name}</div>
+                        {p.clients?.name && (
+                          <div className="mt-1 text-xs text-muted-foreground">{p.clients.name}</div>
+                        )}
+                        <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
+                          <span>{p.service_type ?? "—"}</span>
+                          <span>{p.estimated_value ? `€${Number(p.estimated_value).toLocaleString("en-US")}` : "—"}</span>
+                        </div>
+                      </Link>
                     </div>
                   ))}
                   {items.length === 0 && (
