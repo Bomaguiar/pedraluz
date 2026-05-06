@@ -27,8 +27,10 @@ import { Route as ServicesHomeAdditionsRouteImport } from './routes/services.hom
 import { Route as ServicesCommercialRouteImport } from './routes/services.commercial'
 import { Route as PortalProjectIdRouteImport } from './routes/portal.$projectId'
 import { Route as DashboardProjectsRouteImport } from './routes/dashboard.projects'
+import { Route as DashboardManagersRouteImport } from './routes/dashboard.managers'
 import { Route as DashboardClientsRouteImport } from './routes/dashboard.clients'
 import { Route as DashboardClickupRouteImport } from './routes/dashboard.clickup'
+import { Route as DashboardProjectsProjectIdRouteImport } from './routes/dashboard.projects.$projectId'
 import { Route as ApiPublicClickupWebhookRouteImport } from './routes/api/public/clickup-webhook'
 
 const ServicesRoute = ServicesRouteImport.update({
@@ -121,6 +123,11 @@ const DashboardProjectsRoute = DashboardProjectsRouteImport.update({
   path: '/projects',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardManagersRoute = DashboardManagersRouteImport.update({
+  id: '/managers',
+  path: '/managers',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardClientsRoute = DashboardClientsRouteImport.update({
   id: '/clients',
   path: '/clients',
@@ -131,6 +138,12 @@ const DashboardClickupRoute = DashboardClickupRouteImport.update({
   path: '/clickup',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardProjectsProjectIdRoute =
+  DashboardProjectsProjectIdRouteImport.update({
+    id: '/$projectId',
+    path: '/$projectId',
+    getParentRoute: () => DashboardProjectsRoute,
+  } as any)
 const ApiPublicClickupWebhookRoute = ApiPublicClickupWebhookRouteImport.update({
   id: '/api/public/clickup-webhook',
   path: '/api/public/clickup-webhook',
@@ -150,7 +163,8 @@ export interface FileRoutesByFullPath {
   '/services': typeof ServicesRouteWithChildren
   '/dashboard/clickup': typeof DashboardClickupRoute
   '/dashboard/clients': typeof DashboardClientsRoute
-  '/dashboard/projects': typeof DashboardProjectsRoute
+  '/dashboard/managers': typeof DashboardManagersRoute
+  '/dashboard/projects': typeof DashboardProjectsRouteWithChildren
   '/portal/$projectId': typeof PortalProjectIdRoute
   '/services/commercial': typeof ServicesCommercialRoute
   '/services/home-additions': typeof ServicesHomeAdditionsRoute
@@ -159,6 +173,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/': typeof DashboardIndexRoute
   '/portal/': typeof PortalIndexRoute
   '/api/public/clickup-webhook': typeof ApiPublicClickupWebhookRoute
+  '/dashboard/projects/$projectId': typeof DashboardProjectsProjectIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -171,7 +186,8 @@ export interface FileRoutesByTo {
   '/services': typeof ServicesRouteWithChildren
   '/dashboard/clickup': typeof DashboardClickupRoute
   '/dashboard/clients': typeof DashboardClientsRoute
-  '/dashboard/projects': typeof DashboardProjectsRoute
+  '/dashboard/managers': typeof DashboardManagersRoute
+  '/dashboard/projects': typeof DashboardProjectsRouteWithChildren
   '/portal/$projectId': typeof PortalProjectIdRoute
   '/services/commercial': typeof ServicesCommercialRoute
   '/services/home-additions': typeof ServicesHomeAdditionsRoute
@@ -180,6 +196,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardIndexRoute
   '/portal': typeof PortalIndexRoute
   '/api/public/clickup-webhook': typeof ApiPublicClickupWebhookRoute
+  '/dashboard/projects/$projectId': typeof DashboardProjectsProjectIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -195,7 +212,8 @@ export interface FileRoutesById {
   '/services': typeof ServicesRouteWithChildren
   '/dashboard/clickup': typeof DashboardClickupRoute
   '/dashboard/clients': typeof DashboardClientsRoute
-  '/dashboard/projects': typeof DashboardProjectsRoute
+  '/dashboard/managers': typeof DashboardManagersRoute
+  '/dashboard/projects': typeof DashboardProjectsRouteWithChildren
   '/portal/$projectId': typeof PortalProjectIdRoute
   '/services/commercial': typeof ServicesCommercialRoute
   '/services/home-additions': typeof ServicesHomeAdditionsRoute
@@ -204,6 +222,7 @@ export interface FileRoutesById {
   '/dashboard/': typeof DashboardIndexRoute
   '/portal/': typeof PortalIndexRoute
   '/api/public/clickup-webhook': typeof ApiPublicClickupWebhookRoute
+  '/dashboard/projects/$projectId': typeof DashboardProjectsProjectIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -220,6 +239,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/dashboard/clickup'
     | '/dashboard/clients'
+    | '/dashboard/managers'
     | '/dashboard/projects'
     | '/portal/$projectId'
     | '/services/commercial'
@@ -229,6 +249,7 @@ export interface FileRouteTypes {
     | '/dashboard/'
     | '/portal/'
     | '/api/public/clickup-webhook'
+    | '/dashboard/projects/$projectId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -241,6 +262,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/dashboard/clickup'
     | '/dashboard/clients'
+    | '/dashboard/managers'
     | '/dashboard/projects'
     | '/portal/$projectId'
     | '/services/commercial'
@@ -250,6 +272,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/portal'
     | '/api/public/clickup-webhook'
+    | '/dashboard/projects/$projectId'
   id:
     | '__root__'
     | '/'
@@ -264,6 +287,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/dashboard/clickup'
     | '/dashboard/clients'
+    | '/dashboard/managers'
     | '/dashboard/projects'
     | '/portal/$projectId'
     | '/services/commercial'
@@ -273,6 +297,7 @@ export interface FileRouteTypes {
     | '/dashboard/'
     | '/portal/'
     | '/api/public/clickup-webhook'
+    | '/dashboard/projects/$projectId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -417,6 +442,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardProjectsRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/managers': {
+      id: '/dashboard/managers'
+      path: '/managers'
+      fullPath: '/dashboard/managers'
+      preLoaderRoute: typeof DashboardManagersRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/clients': {
       id: '/dashboard/clients'
       path: '/clients'
@@ -431,6 +463,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardClickupRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/projects/$projectId': {
+      id: '/dashboard/projects/$projectId'
+      path: '/$projectId'
+      fullPath: '/dashboard/projects/$projectId'
+      preLoaderRoute: typeof DashboardProjectsProjectIdRouteImport
+      parentRoute: typeof DashboardProjectsRoute
+    }
     '/api/public/clickup-webhook': {
       id: '/api/public/clickup-webhook'
       path: '/api/public/clickup-webhook'
@@ -441,17 +480,30 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface DashboardProjectsRouteChildren {
+  DashboardProjectsProjectIdRoute: typeof DashboardProjectsProjectIdRoute
+}
+
+const DashboardProjectsRouteChildren: DashboardProjectsRouteChildren = {
+  DashboardProjectsProjectIdRoute: DashboardProjectsProjectIdRoute,
+}
+
+const DashboardProjectsRouteWithChildren =
+  DashboardProjectsRoute._addFileChildren(DashboardProjectsRouteChildren)
+
 interface DashboardRouteChildren {
   DashboardClickupRoute: typeof DashboardClickupRoute
   DashboardClientsRoute: typeof DashboardClientsRoute
-  DashboardProjectsRoute: typeof DashboardProjectsRoute
+  DashboardManagersRoute: typeof DashboardManagersRoute
+  DashboardProjectsRoute: typeof DashboardProjectsRouteWithChildren
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardClickupRoute: DashboardClickupRoute,
   DashboardClientsRoute: DashboardClientsRoute,
-  DashboardProjectsRoute: DashboardProjectsRoute,
+  DashboardManagersRoute: DashboardManagersRoute,
+  DashboardProjectsRoute: DashboardProjectsRouteWithChildren,
   DashboardIndexRoute: DashboardIndexRoute,
 }
 
