@@ -134,6 +134,166 @@ export type Database = {
         }
         Relationships: []
       }
+      project_clients: {
+        Row: {
+          client_id: string | null
+          created_at: string
+          id: string
+          project_id: string
+          user_id: string
+        }
+        Insert: {
+          client_id?: string | null
+          created_at?: string
+          id?: string
+          project_id: string
+          user_id: string
+        }
+        Update: {
+          client_id?: string | null
+          created_at?: string
+          id?: string
+          project_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_clients_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_clients_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_managers: {
+        Row: {
+          bio: string | null
+          created_at: string
+          email: string | null
+          id: string
+          name: string
+          phone: string | null
+          photo_url: string | null
+          role: string | null
+          updated_at: string
+          whatsapp: string | null
+        }
+        Insert: {
+          bio?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          name: string
+          phone?: string | null
+          photo_url?: string | null
+          role?: string | null
+          updated_at?: string
+          whatsapp?: string | null
+        }
+        Update: {
+          bio?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          name?: string
+          phone?: string | null
+          photo_url?: string | null
+          role?: string | null
+          updated_at?: string
+          whatsapp?: string | null
+        }
+        Relationships: []
+      }
+      project_messages: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          project_id: string
+          sender_id: string
+          sender_name: string | null
+          sender_role: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          id?: string
+          project_id: string
+          sender_id: string
+          sender_name?: string | null
+          sender_role: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          project_id?: string
+          sender_id?: string
+          sender_name?: string | null
+          sender_role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_messages_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_milestones: {
+        Row: {
+          created_at: string
+          description: string | null
+          done: boolean
+          done_at: string | null
+          id: string
+          project_id: string
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          done?: boolean
+          done_at?: string | null
+          id?: string
+          project_id: string
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          done?: boolean
+          done_at?: string | null
+          id?: string
+          project_id?: string
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_milestones_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       projects: {
         Row: {
           address: string | null
@@ -142,7 +302,10 @@ export type Database = {
           created_by: string | null
           due_date: string | null
           estimated_value: number | null
+          founder_name: string | null
+          founder_title: string | null
           id: string
+          manager_id: string | null
           name: string
           notes: string | null
           progress: number
@@ -157,7 +320,10 @@ export type Database = {
           created_by?: string | null
           due_date?: string | null
           estimated_value?: number | null
+          founder_name?: string | null
+          founder_title?: string | null
           id?: string
+          manager_id?: string | null
           name: string
           notes?: string | null
           progress?: number
@@ -172,7 +338,10 @@ export type Database = {
           created_by?: string | null
           due_date?: string | null
           estimated_value?: number | null
+          founder_name?: string | null
+          founder_title?: string | null
           id?: string
+          manager_id?: string | null
           name?: string
           notes?: string | null
           progress?: number
@@ -186,6 +355,163 @@ export type Database = {
             columns: ["client_id"]
             isOneToOne: false
             referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "projects_manager_id_fkey"
+            columns: ["manager_id"]
+            isOneToOne: false
+            referencedRelation: "project_managers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      proposal_items: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          proposal_id: string
+          qty: number
+          sort_order: number
+          subtotal: number
+          unit_price: number
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          proposal_id: string
+          qty?: number
+          sort_order?: number
+          subtotal?: number
+          unit_price?: number
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          proposal_id?: string
+          qty?: number
+          sort_order?: number
+          subtotal?: number
+          unit_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "proposal_items_proposal_id_fkey"
+            columns: ["proposal_id"]
+            isOneToOne: false
+            referencedRelation: "proposals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      proposal_milestones: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          proposal_id: string
+          sort_order: number
+          target_date: string | null
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          proposal_id: string
+          sort_order?: number
+          target_date?: string | null
+          title: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          proposal_id?: string
+          sort_order?: number
+          target_date?: string | null
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "proposal_milestones_proposal_id_fkey"
+            columns: ["proposal_id"]
+            isOneToOne: false
+            referencedRelation: "proposals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      proposals: {
+        Row: {
+          accepted_at: string | null
+          accepted_by_name: string | null
+          client_display_name: string | null
+          created_at: string
+          currency: string
+          founder_name: string | null
+          founder_signature_url: string | null
+          founder_title: string | null
+          id: string
+          project_id: string
+          scope: string | null
+          sent_at: string | null
+          status: string
+          terms: string | null
+          title: string
+          total: number
+          updated_at: string
+        }
+        Insert: {
+          accepted_at?: string | null
+          accepted_by_name?: string | null
+          client_display_name?: string | null
+          created_at?: string
+          currency?: string
+          founder_name?: string | null
+          founder_signature_url?: string | null
+          founder_title?: string | null
+          id?: string
+          project_id: string
+          scope?: string | null
+          sent_at?: string | null
+          status?: string
+          terms?: string | null
+          title: string
+          total?: number
+          updated_at?: string
+        }
+        Update: {
+          accepted_at?: string | null
+          accepted_by_name?: string | null
+          client_display_name?: string | null
+          created_at?: string
+          currency?: string
+          founder_name?: string | null
+          founder_signature_url?: string | null
+          founder_title?: string | null
+          id?: string
+          project_id?: string
+          scope?: string | null
+          sent_at?: string | null
+          status?: string
+          terms?: string | null
+          title?: string
+          total?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "proposals_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
             referencedColumns: ["id"]
           },
         ]
@@ -223,9 +549,13 @@ export type Database = {
         }
         Returns: boolean
       }
+      user_has_project_access: {
+        Args: { _project_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
-      app_role: "admin" | "user"
+      app_role: "admin" | "user" | "client"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -353,7 +683,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "user"],
+      app_role: ["admin", "user", "client"],
     },
   },
 } as const
