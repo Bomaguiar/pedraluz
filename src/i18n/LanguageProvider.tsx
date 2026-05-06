@@ -14,10 +14,11 @@ const STORAGE_KEY = "pl_lang";
 function detectInitial(): Lang {
   if (typeof window === "undefined") return "en";
   const stored = window.localStorage.getItem(STORAGE_KEY) as Lang | null;
-  if (stored === "en" || stored === "pt" || stored === "fr") return stored;
+  if (stored === "en" || stored === "pt" || stored === "fr" || stored === "ru") return stored;
   const nav = window.navigator.language?.toLowerCase() ?? "";
   if (nav.startsWith("pt")) return "pt";
   if (nav.startsWith("fr")) return "fr";
+  if (nav.startsWith("ru")) return "ru";
   return "en";
 }
 
