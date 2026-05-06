@@ -223,4 +223,16 @@
       padding-right: 2.5rem;
     }
   }
+
+  .input {
+    width: 100%;
+    border: 1px solid var(--input);
+    background-color: var(--background);
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    outline: none;
+  }
+  .input:focus {
+    border-color: var(--foreground);
+  }
 }
