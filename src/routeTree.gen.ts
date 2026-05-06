@@ -12,20 +12,25 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as PortalRouteImport } from './routes/portal'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PortalIndexRouteImport } from './routes/portal.index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
 import { Route as ServicesRemodelingRouteImport } from './routes/services.remodeling'
 import { Route as ServicesNewHomeBuildRouteImport } from './routes/services.new-home-build'
 import { Route as ServicesHomeAdditionsRouteImport } from './routes/services.home-additions'
 import { Route as ServicesCommercialRouteImport } from './routes/services.commercial'
+import { Route as PortalProjectIdRouteImport } from './routes/portal.$projectId'
 import { Route as DashboardProjectsRouteImport } from './routes/dashboard.projects'
+import { Route as DashboardManagersRouteImport } from './routes/dashboard.managers'
 import { Route as DashboardClientsRouteImport } from './routes/dashboard.clients'
 import { Route as DashboardClickupRouteImport } from './routes/dashboard.clickup'
+import { Route as DashboardProjectsProjectIdRouteImport } from './routes/dashboard.projects.$projectId'
 import { Route as ApiPublicClickupWebhookRouteImport } from './routes/api/public/clickup-webhook'
 
 const ServicesRoute = ServicesRouteImport.update({
@@ -41,6 +46,11 @@ const ProcessRoute = ProcessRouteImport.update({
 const PortfolioRoute = PortfolioRouteImport.update({
   id: '/portfolio',
   path: '/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortalRoute = PortalRouteImport.update({
+  id: '/portal',
+  path: '/portal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PartnersRoute = PartnersRouteImport.update({
@@ -73,6 +83,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PortalIndexRoute = PortalIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PortalRoute,
+} as any)
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -98,9 +113,19 @@ const ServicesCommercialRoute = ServicesCommercialRouteImport.update({
   path: '/commercial',
   getParentRoute: () => ServicesRoute,
 } as any)
+const PortalProjectIdRoute = PortalProjectIdRouteImport.update({
+  id: '/$projectId',
+  path: '/$projectId',
+  getParentRoute: () => PortalRoute,
+} as any)
 const DashboardProjectsRoute = DashboardProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardManagersRoute = DashboardManagersRouteImport.update({
+  id: '/managers',
+  path: '/managers',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardClientsRoute = DashboardClientsRouteImport.update({
@@ -113,6 +138,12 @@ const DashboardClickupRoute = DashboardClickupRouteImport.update({
   path: '/clickup',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardProjectsProjectIdRoute =
+  DashboardProjectsProjectIdRouteImport.update({
+    id: '/$projectId',
+    path: '/$projectId',
+    getParentRoute: () => DashboardProjectsRoute,
+  } as any)
 const ApiPublicClickupWebhookRoute = ApiPublicClickupWebhookRouteImport.update({
   id: '/api/public/clickup-webhook',
   path: '/api/public/clickup-webhook',
@@ -126,18 +157,23 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/partners': typeof PartnersRoute
+  '/portal': typeof PortalRouteWithChildren
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRouteWithChildren
   '/dashboard/clickup': typeof DashboardClickupRoute
   '/dashboard/clients': typeof DashboardClientsRoute
-  '/dashboard/projects': typeof DashboardProjectsRoute
+  '/dashboard/managers': typeof DashboardManagersRoute
+  '/dashboard/projects': typeof DashboardProjectsRouteWithChildren
+  '/portal/$projectId': typeof PortalProjectIdRoute
   '/services/commercial': typeof ServicesCommercialRoute
   '/services/home-additions': typeof ServicesHomeAdditionsRoute
   '/services/new-home-build': typeof ServicesNewHomeBuildRoute
   '/services/remodeling': typeof ServicesRemodelingRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/portal/': typeof PortalIndexRoute
   '/api/public/clickup-webhook': typeof ApiPublicClickupWebhookRoute
+  '/dashboard/projects/$projectId': typeof DashboardProjectsProjectIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -150,13 +186,17 @@ export interface FileRoutesByTo {
   '/services': typeof ServicesRouteWithChildren
   '/dashboard/clickup': typeof DashboardClickupRoute
   '/dashboard/clients': typeof DashboardClientsRoute
-  '/dashboard/projects': typeof DashboardProjectsRoute
+  '/dashboard/managers': typeof DashboardManagersRoute
+  '/dashboard/projects': typeof DashboardProjectsRouteWithChildren
+  '/portal/$projectId': typeof PortalProjectIdRoute
   '/services/commercial': typeof ServicesCommercialRoute
   '/services/home-additions': typeof ServicesHomeAdditionsRoute
   '/services/new-home-build': typeof ServicesNewHomeBuildRoute
   '/services/remodeling': typeof ServicesRemodelingRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/portal': typeof PortalIndexRoute
   '/api/public/clickup-webhook': typeof ApiPublicClickupWebhookRoute
+  '/dashboard/projects/$projectId': typeof DashboardProjectsProjectIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -166,18 +206,23 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/partners': typeof PartnersRoute
+  '/portal': typeof PortalRouteWithChildren
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRouteWithChildren
   '/dashboard/clickup': typeof DashboardClickupRoute
   '/dashboard/clients': typeof DashboardClientsRoute
-  '/dashboard/projects': typeof DashboardProjectsRoute
+  '/dashboard/managers': typeof DashboardManagersRoute
+  '/dashboard/projects': typeof DashboardProjectsRouteWithChildren
+  '/portal/$projectId': typeof PortalProjectIdRoute
   '/services/commercial': typeof ServicesCommercialRoute
   '/services/home-additions': typeof ServicesHomeAdditionsRoute
   '/services/new-home-build': typeof ServicesNewHomeBuildRoute
   '/services/remodeling': typeof ServicesRemodelingRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/portal/': typeof PortalIndexRoute
   '/api/public/clickup-webhook': typeof ApiPublicClickupWebhookRoute
+  '/dashboard/projects/$projectId': typeof DashboardProjectsProjectIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -188,18 +233,23 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/partners'
+    | '/portal'
     | '/portfolio'
     | '/process'
     | '/services'
     | '/dashboard/clickup'
     | '/dashboard/clients'
+    | '/dashboard/managers'
     | '/dashboard/projects'
+    | '/portal/$projectId'
     | '/services/commercial'
     | '/services/home-additions'
     | '/services/new-home-build'
     | '/services/remodeling'
     | '/dashboard/'
+    | '/portal/'
     | '/api/public/clickup-webhook'
+    | '/dashboard/projects/$projectId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -212,13 +262,17 @@ export interface FileRouteTypes {
     | '/services'
     | '/dashboard/clickup'
     | '/dashboard/clients'
+    | '/dashboard/managers'
     | '/dashboard/projects'
+    | '/portal/$projectId'
     | '/services/commercial'
     | '/services/home-additions'
     | '/services/new-home-build'
     | '/services/remodeling'
     | '/dashboard'
+    | '/portal'
     | '/api/public/clickup-webhook'
+    | '/dashboard/projects/$projectId'
   id:
     | '__root__'
     | '/'
@@ -227,18 +281,23 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/partners'
+    | '/portal'
     | '/portfolio'
     | '/process'
     | '/services'
     | '/dashboard/clickup'
     | '/dashboard/clients'
+    | '/dashboard/managers'
     | '/dashboard/projects'
+    | '/portal/$projectId'
     | '/services/commercial'
     | '/services/home-additions'
     | '/services/new-home-build'
     | '/services/remodeling'
     | '/dashboard/'
+    | '/portal/'
     | '/api/public/clickup-webhook'
+    | '/dashboard/projects/$projectId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -248,6 +307,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRouteWithChildren
   PartnersRoute: typeof PartnersRoute
+  PortalRoute: typeof PortalRouteWithChildren
   PortfolioRoute: typeof PortfolioRoute
   ProcessRoute: typeof ProcessRoute
   ServicesRoute: typeof ServicesRouteWithChildren
@@ -275,6 +335,13 @@ declare module '@tanstack/react-router' {
       path: '/portfolio'
       fullPath: '/portfolio'
       preLoaderRoute: typeof PortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portal': {
+      id: '/portal'
+      path: '/portal'
+      fullPath: '/portal'
+      preLoaderRoute: typeof PortalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/partners': {
@@ -319,6 +386,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/portal/': {
+      id: '/portal/'
+      path: '/'
+      fullPath: '/portal/'
+      preLoaderRoute: typeof PortalIndexRouteImport
+      parentRoute: typeof PortalRoute
+    }
     '/dashboard/': {
       id: '/dashboard/'
       path: '/'
@@ -354,11 +428,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesCommercialRouteImport
       parentRoute: typeof ServicesRoute
     }
+    '/portal/$projectId': {
+      id: '/portal/$projectId'
+      path: '/$projectId'
+      fullPath: '/portal/$projectId'
+      preLoaderRoute: typeof PortalProjectIdRouteImport
+      parentRoute: typeof PortalRoute
+    }
     '/dashboard/projects': {
       id: '/dashboard/projects'
       path: '/projects'
       fullPath: '/dashboard/projects'
       preLoaderRoute: typeof DashboardProjectsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/managers': {
+      id: '/dashboard/managers'
+      path: '/managers'
+      fullPath: '/dashboard/managers'
+      preLoaderRoute: typeof DashboardManagersRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/dashboard/clients': {
@@ -375,6 +463,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardClickupRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/projects/$projectId': {
+      id: '/dashboard/projects/$projectId'
+      path: '/$projectId'
+      fullPath: '/dashboard/projects/$projectId'
+      preLoaderRoute: typeof DashboardProjectsProjectIdRouteImport
+      parentRoute: typeof DashboardProjectsRoute
+    }
     '/api/public/clickup-webhook': {
       id: '/api/public/clickup-webhook'
       path: '/api/public/clickup-webhook'
@@ -385,23 +480,49 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface DashboardProjectsRouteChildren {
+  DashboardProjectsProjectIdRoute: typeof DashboardProjectsProjectIdRoute
+}
+
+const DashboardProjectsRouteChildren: DashboardProjectsRouteChildren = {
+  DashboardProjectsProjectIdRoute: DashboardProjectsProjectIdRoute,
+}
+
+const DashboardProjectsRouteWithChildren =
+  DashboardProjectsRoute._addFileChildren(DashboardProjectsRouteChildren)
+
 interface DashboardRouteChildren {
   DashboardClickupRoute: typeof DashboardClickupRoute
   DashboardClientsRoute: typeof DashboardClientsRoute
-  DashboardProjectsRoute: typeof DashboardProjectsRoute
+  DashboardManagersRoute: typeof DashboardManagersRoute
+  DashboardProjectsRoute: typeof DashboardProjectsRouteWithChildren
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardClickupRoute: DashboardClickupRoute,
   DashboardClientsRoute: DashboardClientsRoute,
-  DashboardProjectsRoute: DashboardProjectsRoute,
+  DashboardManagersRoute: DashboardManagersRoute,
+  DashboardProjectsRoute: DashboardProjectsRouteWithChildren,
   DashboardIndexRoute: DashboardIndexRoute,
 }
 
 const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
   DashboardRouteChildren,
 )
+
+interface PortalRouteChildren {
+  PortalProjectIdRoute: typeof PortalProjectIdRoute
+  PortalIndexRoute: typeof PortalIndexRoute
+}
+
+const PortalRouteChildren: PortalRouteChildren = {
+  PortalProjectIdRoute: PortalProjectIdRoute,
+  PortalIndexRoute: PortalIndexRoute,
+}
+
+const PortalRouteWithChildren =
+  PortalRoute._addFileChildren(PortalRouteChildren)
 
 interface ServicesRouteChildren {
   ServicesCommercialRoute: typeof ServicesCommercialRoute
@@ -428,6 +549,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRouteWithChildren,
   PartnersRoute: PartnersRoute,
+  PortalRoute: PortalRouteWithChildren,
   PortfolioRoute: PortfolioRoute,
   ProcessRoute: ProcessRoute,
   ServicesRoute: ServicesRouteWithChildren,
@@ -436,12 +558,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
