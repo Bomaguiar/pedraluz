@@ -12,12 +12,14 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as PortalRouteImport } from './routes/portal'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PortalIndexRouteImport } from './routes/portal.index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
 import { Route as ServicesRemodelingRouteImport } from './routes/services.remodeling'
 import { Route as ServicesNewHomeBuildRouteImport } from './routes/services.new-home-build'
@@ -41,6 +43,11 @@ const ProcessRoute = ProcessRouteImport.update({
 const PortfolioRoute = PortfolioRouteImport.update({
   id: '/portfolio',
   path: '/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortalRoute = PortalRouteImport.update({
+  id: '/portal',
+  path: '/portal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PartnersRoute = PartnersRouteImport.update({
@@ -72,6 +79,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const PortalIndexRoute = PortalIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PortalRoute,
 } as any)
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/',
@@ -126,6 +138,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/partners': typeof PartnersRoute
+  '/portal': typeof PortalRouteWithChildren
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRouteWithChildren
@@ -137,6 +150,7 @@ export interface FileRoutesByFullPath {
   '/services/new-home-build': typeof ServicesNewHomeBuildRoute
   '/services/remodeling': typeof ServicesRemodelingRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/portal/': typeof PortalIndexRoute
   '/api/public/clickup-webhook': typeof ApiPublicClickupWebhookRoute
 }
 export interface FileRoutesByTo {
@@ -156,6 +170,7 @@ export interface FileRoutesByTo {
   '/services/new-home-build': typeof ServicesNewHomeBuildRoute
   '/services/remodeling': typeof ServicesRemodelingRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/portal': typeof PortalIndexRoute
   '/api/public/clickup-webhook': typeof ApiPublicClickupWebhookRoute
 }
 export interface FileRoutesById {
@@ -166,6 +181,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/partners': typeof PartnersRoute
+  '/portal': typeof PortalRouteWithChildren
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRouteWithChildren
@@ -177,6 +193,7 @@ export interface FileRoutesById {
   '/services/new-home-build': typeof ServicesNewHomeBuildRoute
   '/services/remodeling': typeof ServicesRemodelingRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/portal/': typeof PortalIndexRoute
   '/api/public/clickup-webhook': typeof ApiPublicClickupWebhookRoute
 }
 export interface FileRouteTypes {
@@ -188,6 +205,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/partners'
+    | '/portal'
     | '/portfolio'
     | '/process'
     | '/services'
@@ -199,6 +217,7 @@ export interface FileRouteTypes {
     | '/services/new-home-build'
     | '/services/remodeling'
     | '/dashboard/'
+    | '/portal/'
     | '/api/public/clickup-webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -218,6 +237,7 @@ export interface FileRouteTypes {
     | '/services/new-home-build'
     | '/services/remodeling'
     | '/dashboard'
+    | '/portal'
     | '/api/public/clickup-webhook'
   id:
     | '__root__'
@@ -227,6 +247,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/partners'
+    | '/portal'
     | '/portfolio'
     | '/process'
     | '/services'
@@ -238,6 +259,7 @@ export interface FileRouteTypes {
     | '/services/new-home-build'
     | '/services/remodeling'
     | '/dashboard/'
+    | '/portal/'
     | '/api/public/clickup-webhook'
   fileRoutesById: FileRoutesById
 }
@@ -248,6 +270,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRouteWithChildren
   PartnersRoute: typeof PartnersRoute
+  PortalRoute: typeof PortalRouteWithChildren
   PortfolioRoute: typeof PortfolioRoute
   ProcessRoute: typeof ProcessRoute
   ServicesRoute: typeof ServicesRouteWithChildren
@@ -275,6 +298,13 @@ declare module '@tanstack/react-router' {
       path: '/portfolio'
       fullPath: '/portfolio'
       preLoaderRoute: typeof PortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portal': {
+      id: '/portal'
+      path: '/portal'
+      fullPath: '/portal'
+      preLoaderRoute: typeof PortalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/partners': {
@@ -318,6 +348,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/portal/': {
+      id: '/portal/'
+      path: '/'
+      fullPath: '/portal/'
+      preLoaderRoute: typeof PortalIndexRouteImport
+      parentRoute: typeof PortalRoute
     }
     '/dashboard/': {
       id: '/dashboard/'
@@ -403,6 +440,17 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
   DashboardRouteChildren,
 )
 
+interface PortalRouteChildren {
+  PortalIndexRoute: typeof PortalIndexRoute
+}
+
+const PortalRouteChildren: PortalRouteChildren = {
+  PortalIndexRoute: PortalIndexRoute,
+}
+
+const PortalRouteWithChildren =
+  PortalRoute._addFileChildren(PortalRouteChildren)
+
 interface ServicesRouteChildren {
   ServicesCommercialRoute: typeof ServicesCommercialRoute
   ServicesHomeAdditionsRoute: typeof ServicesHomeAdditionsRoute
@@ -428,6 +476,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRouteWithChildren,
   PartnersRoute: PartnersRoute,
+  PortalRoute: PortalRouteWithChildren,
   PortfolioRoute: PortfolioRoute,
   ProcessRoute: ProcessRoute,
   ServicesRoute: ServicesRouteWithChildren,
