@@ -25,6 +25,7 @@ import { Route as ServicesRemodelingRouteImport } from './routes/services.remode
 import { Route as ServicesNewHomeBuildRouteImport } from './routes/services.new-home-build'
 import { Route as ServicesHomeAdditionsRouteImport } from './routes/services.home-additions'
 import { Route as ServicesCommercialRouteImport } from './routes/services.commercial'
+import { Route as ProposalsYuliaRouteImport } from './routes/proposals.yulia'
 import { Route as PortalProjectIdRouteImport } from './routes/portal.$projectId'
 import { Route as DashboardProjectsRouteImport } from './routes/dashboard.projects'
 import { Route as DashboardManagersRouteImport } from './routes/dashboard.managers'
@@ -113,6 +114,11 @@ const ServicesCommercialRoute = ServicesCommercialRouteImport.update({
   path: '/commercial',
   getParentRoute: () => ServicesRoute,
 } as any)
+const ProposalsYuliaRoute = ProposalsYuliaRouteImport.update({
+  id: '/proposals/yulia',
+  path: '/proposals/yulia',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PortalProjectIdRoute = PortalProjectIdRouteImport.update({
   id: '/$projectId',
   path: '/$projectId',
@@ -166,6 +172,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/managers': typeof DashboardManagersRoute
   '/dashboard/projects': typeof DashboardProjectsRouteWithChildren
   '/portal/$projectId': typeof PortalProjectIdRoute
+  '/proposals/yulia': typeof ProposalsYuliaRoute
   '/services/commercial': typeof ServicesCommercialRoute
   '/services/home-additions': typeof ServicesHomeAdditionsRoute
   '/services/new-home-build': typeof ServicesNewHomeBuildRoute
@@ -189,6 +196,7 @@ export interface FileRoutesByTo {
   '/dashboard/managers': typeof DashboardManagersRoute
   '/dashboard/projects': typeof DashboardProjectsRouteWithChildren
   '/portal/$projectId': typeof PortalProjectIdRoute
+  '/proposals/yulia': typeof ProposalsYuliaRoute
   '/services/commercial': typeof ServicesCommercialRoute
   '/services/home-additions': typeof ServicesHomeAdditionsRoute
   '/services/new-home-build': typeof ServicesNewHomeBuildRoute
@@ -215,6 +223,7 @@ export interface FileRoutesById {
   '/dashboard/managers': typeof DashboardManagersRoute
   '/dashboard/projects': typeof DashboardProjectsRouteWithChildren
   '/portal/$projectId': typeof PortalProjectIdRoute
+  '/proposals/yulia': typeof ProposalsYuliaRoute
   '/services/commercial': typeof ServicesCommercialRoute
   '/services/home-additions': typeof ServicesHomeAdditionsRoute
   '/services/new-home-build': typeof ServicesNewHomeBuildRoute
@@ -242,6 +251,7 @@ export interface FileRouteTypes {
     | '/dashboard/managers'
     | '/dashboard/projects'
     | '/portal/$projectId'
+    | '/proposals/yulia'
     | '/services/commercial'
     | '/services/home-additions'
     | '/services/new-home-build'
@@ -265,6 +275,7 @@ export interface FileRouteTypes {
     | '/dashboard/managers'
     | '/dashboard/projects'
     | '/portal/$projectId'
+    | '/proposals/yulia'
     | '/services/commercial'
     | '/services/home-additions'
     | '/services/new-home-build'
@@ -290,6 +301,7 @@ export interface FileRouteTypes {
     | '/dashboard/managers'
     | '/dashboard/projects'
     | '/portal/$projectId'
+    | '/proposals/yulia'
     | '/services/commercial'
     | '/services/home-additions'
     | '/services/new-home-build'
@@ -311,6 +323,7 @@ export interface RootRouteChildren {
   PortfolioRoute: typeof PortfolioRoute
   ProcessRoute: typeof ProcessRoute
   ServicesRoute: typeof ServicesRouteWithChildren
+  ProposalsYuliaRoute: typeof ProposalsYuliaRoute
   ApiPublicClickupWebhookRoute: typeof ApiPublicClickupWebhookRoute
 }
 
@@ -427,6 +440,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/services/commercial'
       preLoaderRoute: typeof ServicesCommercialRouteImport
       parentRoute: typeof ServicesRoute
+    }
+    '/proposals/yulia': {
+      id: '/proposals/yulia'
+      path: '/proposals/yulia'
+      fullPath: '/proposals/yulia'
+      preLoaderRoute: typeof ProposalsYuliaRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/portal/$projectId': {
       id: '/portal/$projectId'
@@ -553,6 +573,7 @@ const rootRouteChildren: RootRouteChildren = {
   PortfolioRoute: PortfolioRoute,
   ProcessRoute: ProcessRoute,
   ServicesRoute: ServicesRouteWithChildren,
+  ProposalsYuliaRoute: ProposalsYuliaRoute,
   ApiPublicClickupWebhookRoute: ApiPublicClickupWebhookRoute,
 }
 export const routeTree = rootRouteImport
