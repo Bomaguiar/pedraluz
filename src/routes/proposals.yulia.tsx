@@ -124,9 +124,12 @@ function YuliaProposalPage() {
 
 function ProposalDeck() {
   const [current, setCurrent] = useState(0);
-  const total = 4;
+  const total = 5;
 
-  const go = (n: number) => setCurrent(((n % total) + total) % total);
+  const go = (n: number) => {
+    setCurrent(((n % total) + total) % total);
+    if (typeof window !== "undefined") window.scrollTo(0, 0);
+  };
 
   const handleGlobalClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
@@ -134,16 +137,48 @@ function ProposalDeck() {
     go(current + 1);
   };
 
+  useEffect(() => {
+    let lastScrollTime = 0;
+    const onWheel = (e: WheelEvent) => {
+      const now = Date.now();
+      if (now - lastScrollTime < 1000) return;
+      const isAtBottom = window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2;
+      if (e.deltaY > 50 && isAtBottom) {
+        setCurrent((c) => (c + 1) % total);
+        window.scrollTo(0, 0);
+        lastScrollTime = now;
+      }
+    };
+    let touchStart = 0;
+    const onTouchStart = (e: TouchEvent) => { touchStart = e.changedTouches[0].screenY; };
+    const onTouchEnd = (e: TouchEvent) => {
+      const touchEnd = e.changedTouches[0].screenY;
+      const isAtBottom = window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2;
+      if (touchStart - touchEnd > 80 && isAtBottom) {
+        setCurrent((c) => (c + 1) % total);
+        window.scrollTo(0, 0);
+      }
+    };
+    window.addEventListener("wheel", onWheel);
+    window.addEventListener("touchstart", onTouchStart);
+    window.addEventListener("touchend", onTouchEnd);
+    return () => {
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+  }, []);
+
   return (
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Tenor+Sans&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
         .pl-root { --stone:#1a1814;--stone-mid:#252118;--stone-warm:#302b22;--gold:#c8a96e;--gold-light:#e0c99a;--gold-dim:rgba(200,169,110,0.15);--cream:#f4f0e8;--cream-mid:#ccc8be;--muted:#6e6a62;--border:rgba(200,169,110,0.18);--border-s:rgba(200,169,110,0.35);
-          background:var(--stone); color:var(--cream); font-family:'DM Sans',sans-serif; font-weight:300; line-height:1.5; min-height:100vh; cursor:pointer;
+          background:var(--stone); color:var(--cream); font-family:'DM Sans',sans-serif; font-weight:300; line-height:1.5; min-height:100vh; cursor:pointer; overflow-x:hidden;
         }
         .pl-root *,.pl-root *::before,.pl-root *::after{box-sizing:border-box;margin:0;padding:0}
-        .pl-pres{width:100%; max-width:860px; margin:0 auto; overflow:hidden;}
-        .pl-nav{display:flex;align-items:center;justify-content:space-between;padding:20px;border-bottom:0.5px solid var(--border); position:relative; z-index:10;}
+        .pl-pres{width:100%; max-width:860px; margin:0 auto; min-height:100vh; display:flex; flex-direction:column;}
+        .pl-nav{display:flex;align-items:center;justify-content:space-between;padding:20px;border-bottom:0.5px solid var(--border); position:sticky; top:0; background:var(--stone); z-index:100;}
         .pl-nav-logo{font-family:'Cormorant Garamond',serif; font-weight:500; font-size:18px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold);}
         .pl-nav-logo span{display:block; font-size:8px; letter-spacing:.15em; color:var(--muted); margin-top:2px; font-family:'DM Sans',sans-serif;}
         .pl-nav-dots{display:flex;gap:8px;align-items:center;}
@@ -151,7 +186,8 @@ function ProposalDeck() {
         .pl-dot.active{background:var(--gold);}
         .pl-nav-btns{display:flex;gap:10px;}
         .pl-nav-btn{background:none;border:0.5px solid var(--border-s);color:var(--gold);font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;cursor:pointer;border-radius:2px;}
-        .pl-slide{display:none; min-height:80vh; flex-direction:column; justify-content:center; padding:40px 25px; user-select:none;}
+        .pl-slides{position:relative; flex-grow:1;}
+        .pl-slide{display:none; min-height:85vh; flex-direction:column; justify-content:center; padding:60px 25px; user-select:none;}
         .pl-slide.active{display:flex;}
         .pl-brand-title{font-family:'Cormorant Garamond',serif; font-size:72px; font-weight:300; color:var(--gold); text-transform:uppercase; letter-spacing:0.05em; line-height:0.85; margin-bottom:15px;}
         .pl-s1-tag{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
@@ -163,6 +199,9 @@ function ProposalDeck() {
         .pl-s1-meta{margin-top:30px; display:grid; grid-template-columns:1fr 1fr; gap:20px; padding-top:25px; border-top:0.5px solid var(--border);}
         .pl-s1-meta-label{font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
         .pl-s1-meta-val{font-size:12px;color:var(--cream);margin-top:4px; font-family:'Tenor Sans',sans-serif;}
+        .pl-value-statement{font-size:13px; color:var(--gold-light); font-style:italic; margin-bottom:25px; max-width:500px; line-height:1.5; border-left:2px solid var(--gold); padding-left:15px;}
+        .pl-features-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-bottom:30px;}
+        .pl-feat-item{font-size:9px; text-transform:uppercase; letter-spacing:0.1em; color:var(--gold); border:0.5px solid var(--border-s); padding:8px; text-align:center;}
         .pl-team-grid{display:grid; grid-template-columns:1fr; gap:20px; margin-top:15px;}
         .pl-team-member{border-left:1px solid var(--border); padding-left:15px;}
         .pl-team-name{font-family:'Cormorant Garamond',serif; font-size:18px; text-transform:uppercase; color:var(--gold); margin-bottom:2px;}
@@ -170,6 +209,11 @@ function ProposalDeck() {
         .pl-team-bio{font-size:11px; color:var(--cream-mid); line-height:1.4;}
         .pl-section-label{font-size:9px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
         .pl-section-label::after{content:'';flex:1;height:0.5px;background:var(--border);}
+        .pl-s4-grid{display:grid;grid-template-columns:1fr; gap:10px; margin-top:20px;}
+        .pl-s4-item{background:var(--stone-mid);border:0.5px solid var(--border);padding:18px;display:flex;gap:15px;}
+        .pl-s4-num{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--gold);opacity:0.6;}
+        .pl-s4-item-title{font-family:'Tenor Sans',sans-serif; font-size:13px; text-transform:uppercase; color:var(--gold-light); margin-bottom:4px;}
+        .pl-s4-item-desc{font-size:11px; color:var(--muted);}
         .pl-tl-item{display:flex;gap:15px;margin-bottom:15px;}
         .pl-tl-circle{width:32px;height:32px;border-radius:50%;border:0.5px solid var(--gold);background:var(--stone-mid);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--gold);font-family:'Cormorant Garamond',serif; flex-shrink:0;}
         .pl-tl-phase{font-family:'Cormorant Garamond',serif; font-size:20px; text-transform:uppercase; color:var(--gold-light); line-height:1;}
@@ -185,10 +229,11 @@ function ProposalDeck() {
         .pl-s6-contacts{display:grid; grid-template-columns:1fr; margin-top:30px; border:0.5px solid var(--border);}
         .pl-s6-contact{padding:15px; border-bottom:0.5px solid var(--border); text-decoration:none; cursor:pointer; position:relative; z-index:20; display:block; color:inherit;}
         .pl-s6-contact-val{font-size:12px; color:var(--gold); font-family:'Cormorant Garamond',serif;}
-        .pl-counter{text-align:center;padding:15px;font-size:10px;color:var(--muted);border-top:0.5px solid var(--border);}
+        .pl-counter{text-align:center;padding:15px;font-size:10px;color:var(--muted);border-top:0.5px solid var(--border); margin-top:auto;}
         @media (min-width:600px){
           .pl-brand-title{font-size:92px;}
           .pl-team-grid{grid-template-columns:1fr 1fr 1fr;}
+          .pl-s4-grid{grid-template-columns:1fr 1fr;}
           .pl-s5-row{display:grid; grid-template-columns:1.2fr 0.8fr; gap:40px;}
           .pl-s6-contacts{grid-template-columns:repeat(4,1fr);}
           .pl-s6-contact{border-bottom:none; border-right:0.5px solid var(--border);}
@@ -224,6 +269,7 @@ function ProposalDeck() {
           </div>
 
           <div className="pl-slides">
+            {/* Slide 0 — Cover */}
             <div className={`pl-slide${current === 0 ? " active" : ""}`}>
               <div className="pl-s1-tag">Proposal · PL-2026</div>
               <div className="pl-brand-title">Pedra<br />& Luz</div>
@@ -235,35 +281,79 @@ function ProposalDeck() {
                 <div className="pl-s1-client-name">Yuliya Pozdniak</div>
               </div>
               <div className="pl-s1-meta">
-                <div><div className="pl-s1-meta-label">Property</div><div className="pl-s1-meta-val">Cascais Res.</div></div>
+                <div><div className="pl-s1-meta-label">Property</div><div className="pl-s1-meta-val">Cascais Res. (259sqm)</div></div>
                 <div><div className="pl-s1-meta-label">Location</div><div className="pl-s1-meta-val">Portugal</div></div>
                 <div><div className="pl-s1-meta-label">Total (incl. Tax)</div><div className="pl-s1-meta-val">€4,400.00</div></div>
                 <div><div className="pl-s1-meta-label">Date</div><div className="pl-s1-meta-val">May 2026</div></div>
               </div>
             </div>
 
+            {/* Slide 1 — Partners */}
             <div className={`pl-slide${current === 1 ? " active" : ""}`}>
-              <div className="pl-section-label">Strategic Leadership</div>
+              <div className="pl-section-label">The Partners</div>
+              <p className="pl-value-statement">
+                "Not the cheapest option — but built to avoid the problems that come from rushed or incomplete drawings."
+              </p>
+              <div className="pl-features-grid">
+                <div className="pl-feat-item">U.S. Licensed Architect</div>
+                <div className="pl-feat-item">3D Scan Verified</div>
+                <div className="pl-feat-item">US · Asia · Europe</div>
+                <div className="pl-feat-item">Architect-reviewed CAD</div>
+                <div className="pl-feat-item">Clear deliverables</div>
+              </div>
               <div className="pl-team-grid">
+                <div className="pl-team-member">
+                  <div className="pl-team-name">3D + Manual</div>
+                  <div className="pl-team-bio">3D scanning verifies key dimensions. Every measurement is then checked manually on site by a trained eye.</div>
+                </div>
+                <div className="pl-team-member">
+                  <div className="pl-team-name">Architect-reviewed</div>
+                  <div className="pl-team-bio">Drawings are reviewed with an architect's eye, not just a technician's so they work for design, contractors and planning.</div>
+                </div>
+                <div className="pl-team-member">
+                  <div className="pl-team-name">International standard</div>
+                  <div className="pl-team-bio">Experienced across the US, Asia and Europe. Used to international clients and professional expectations.</div>
+                </div>
+              </div>
+              <div className="pl-team-grid" style={{ marginTop: 30, borderTop: "0.5px solid var(--border)", paddingTop: 20 }}>
                 <div className="pl-team-member">
                   <div className="pl-team-name">Ilya Bourim</div>
                   <div className="pl-team-role">Principal Architect</div>
-                  <div className="pl-team-bio">Registered Architect and Computer Scientist with 15+ years experience bridging physical infrastructure and computational logic.</div>
                 </div>
                 <div className="pl-team-member">
                   <div className="pl-team-name">Pedro Aguiar</div>
                   <div className="pl-team-role">Operations & Technology Director</div>
-                  <div className="pl-team-bio">14+ years in tech across gaming, blockchain, and digital infrastructure. Leads operations, AI integration, and technology pipeline.</div>
                 </div>
                 <div className="pl-team-member">
                   <div className="pl-team-name">Francisco Manani</div>
                   <div className="pl-team-role">Lead Constructor</div>
-                  <div className="pl-team-bio">20+ years building across 6+ countries — from renovations to ground-up construction. Owns on-site delivery end to end.</div>
                 </div>
               </div>
             </div>
 
+            {/* Slide 2 — Deliverables */}
             <div className={`pl-slide${current === 2 ? " active" : ""}`}>
+              <div className="pl-section-label">Deliverables</div>
+              <div className="pl-s4-grid">
+                {[
+                  { n: "01", t: "DWG Floor Plans", d: "High-precision verified CAD floor plans in professional DWG format." },
+                  { n: "02", t: "PDF Drawing Set", d: "Fully annotated PDF set including room names and critical dimensions." },
+                  { n: "03", t: "3D Verification", d: "LiDAR scan data used to cross-verify all site measurements." },
+                  { n: "04", t: "Design Ready", d: "Architect-reviewed files ready for immediate design and contractor use." },
+                ].map((it) => (
+                  <div className="pl-s4-item" key={it.n}>
+                    <div className="pl-s4-num">{it.n}</div>
+                    <div>
+                      <div className="pl-s4-item-title">{it.t}</div>
+                      <div className="pl-s4-item-desc">{it.d}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Slide 3 — Timeline & Payment */}
+            <div className={`pl-slide${current === 3 ? " active" : ""}`}>
               <div className="pl-s5-row">
                 <div>
                   <div className="pl-section-label">Timeline</div>
@@ -300,7 +390,8 @@ function ProposalDeck() {
               </div>
             </div>
 
-            <div className={`pl-slide${current === 3 ? " active" : ""}`}>
+            {/* Slide 4 — Contact */}
+            <div className={`pl-slide${current === 4 ? " active" : ""}`}>
               <div className="pl-s6-center">
                 <div className="pl-s6-pre">Yuliya Pozdniak</div>
                 <div className="pl-s6-title">
