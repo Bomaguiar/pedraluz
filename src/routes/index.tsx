@@ -257,70 +257,70 @@ function HomePage() {
         </div>
       </section>
 
-      {/* PROCESS */}
+      {/* TEAM */}
       <section
         className="border-y"
         style={{ backgroundColor: "var(--surface)" }}
       >
         <div className="container-edge py-32">
           <div className="mb-16">
-            <p className="label-tag text-[var(--brass-dark)]">{t("home.process.eyebrow")}</p>
-            <h2 className="font-display mt-4 max-w-2xl whitespace-pre-line text-4xl leading-tight md:text-6xl">
-              {t("home.process.title")}
+            <p className="label-tag text-[var(--brass-dark)]">{t("home.team.eyebrow")}</p>
+            <h2 className="font-display mt-4 text-4xl leading-tight md:text-6xl">
+              {t("home.team.title")}
             </h2>
           </div>
 
-          <div className="relative">
-            <div className="absolute left-0 right-0 top-6 hidden h-px bg-border md:block" />
-            <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-7">
-              {PROCESS.map((p) => (
-                <div key={p.n} className="relative">
-                  <div className="relative z-10 mb-5 flex h-12 w-12 items-center justify-center bg-background text-[11px] uppercase tracking-[0.18em] text-foreground border border-border">
-                    {p.n}
-                  </div>
-                  <h3 className="text-sm font-medium text-foreground">{t(p.tKey)}</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                    {t(p.dKey)}
-                  </p>
-                  {p.ai && (
-                    <span className="mt-3 inline-flex items-center gap-1 border border-[var(--brass)]/50 px-2 py-1 text-[9px] uppercase tracking-[0.15em] text-[var(--brass-dark)]">
-                      <Sparkles className="h-2.5 w-2.5" /> {t("process.aiBadge")}
-                    </span>
-                  )}
+          <div className="grid gap-8 md:grid-cols-3">
+            {TEAM.map((m) => (
+              <div key={m.name} className="group">
+                <div className="aspect-[4/5] overflow-hidden bg-foreground/10">
+                  <img
+                    src={m.img}
+                    alt={m.name}
+                    className="img-warm h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    loading="lazy"
+                  />
                 </div>
-              ))}
-            </div>
+                <h3 className="font-display mt-6 text-2xl">{m.name}</h3>
+                <p className="label-tag mt-1 text-[var(--brass-dark)]">{m.role}</p>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                  {m.bio}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* TEAM */}
+      {/* PROCESS */}
       <section className="container-edge py-32">
         <div className="mb-16">
-          <p className="label-tag text-[var(--brass-dark)]">{t("home.team.eyebrow")}</p>
-          <h2 className="font-display mt-4 text-4xl leading-tight md:text-6xl">
-            {t("home.team.title")}
+          <p className="label-tag text-[var(--brass-dark)]">{t("home.process.eyebrow")}</p>
+          <h2 className="font-display mt-4 max-w-2xl whitespace-pre-line text-4xl leading-tight md:text-6xl">
+            {t("home.process.title")}
           </h2>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-3">
-          {TEAM.map((m) => (
-            <div key={m.name} className="group">
-              <div className="aspect-[4/5] overflow-hidden bg-foreground/10">
-                <img
-                  src={m.img}
-                  alt={m.name}
-                  className="img-warm h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                  loading="lazy"
-                />
+        <div className="relative">
+          <div className="absolute left-0 right-0 top-6 hidden h-px bg-border md:block" />
+          <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-7">
+            {PROCESS.map((p) => (
+              <div key={p.n} className="relative">
+                <div className="relative z-10 mb-5 flex h-12 w-12 items-center justify-center bg-background text-[11px] uppercase tracking-[0.18em] text-foreground border border-border">
+                  {p.n}
+                </div>
+                <h3 className="text-sm font-medium text-foreground">{t(p.tKey)}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                  {t(p.dKey)}
+                </p>
+                {p.ai && (
+                  <span className="mt-3 inline-flex items-center gap-1 border border-[var(--brass)]/50 px-2 py-1 text-[9px] uppercase tracking-[0.15em] text-[var(--brass-dark)]">
+                    <Sparkles className="h-2.5 w-2.5" /> {t("process.aiBadge")}
+                  </span>
+                )}
               </div>
-              <h3 className="font-display mt-6 text-2xl">{m.name}</h3>
-              <p className="label-tag mt-1 text-[var(--brass-dark)]">{m.role}</p>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                {m.bio}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
