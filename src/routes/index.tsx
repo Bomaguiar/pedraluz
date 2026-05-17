@@ -4,6 +4,7 @@ import { ArrowRight, Brain, Clock, LineChart, Sparkles } from "lucide-react";
 import { useLang } from "@/i18n/LanguageProvider";
 import type { TranslationKey } from "@/i18n/translations";
 import heroImg from "@/assets/hero-architecture.jpg";
+import heroVideo from "@/assets/hero-architecture.mp4.asset.json";
 import newhomeImg from "@/assets/service-newhome.jpg";
 import remodelImg from "@/assets/service-remodel.jpg";
 import additionImg from "@/assets/service-addition.jpg";
@@ -88,11 +89,15 @@ function HomePage() {
     <SiteLayout overHero>
       {/* HERO */}
       <section className="relative h-screen min-h-[720px] overflow-hidden text-white">
-        <img
-          src={heroImg}
-          alt="Modern architectural exterior at golden hour"
+        <video
+          src={heroVideo.url}
+          poster={heroImg}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
           className="img-warm absolute inset-0 h-full w-full object-cover"
-          fetchPriority="high"
         />
         <div
           className="absolute inset-0"
