@@ -64,10 +64,10 @@ export const translations = {
     ru: "Архитектура, построенная\nдля того, как вы живёте.",
   },
   "home.hero.subtitle": {
-    en: "From concept to construction — precision-engineered design for residential, commercial, and transformation projects.",
-    pt: "Do conceito à construção — design rigoroso para projetos residenciais, comerciais e de transformação.",
-    fr: "De la conception à la construction — un design rigoureux pour des projets résidentiels, commerciaux et de transformation.",
-    ru: "От концепции до строительства — точный, инженерный подход к жилым, коммерческим и трансформационным проектам.",
+    en: "Pedra Luz is a technology-enabled architecture and construction company delivering transparent, design-led projects with the precision of software.",
+    pt: "A Pedra Luz é uma empresa de arquitetura e construção apoiada na tecnologia, que entrega projetos transparentes e orientados pelo design com a precisão de software.",
+    fr: "Pedra Luz est une société d'architecture et de construction assistée par la technologie, qui livre des projets transparents et pilotés par le design avec la précision d'un logiciel.",
+    ru: "Pedra Luz — это архитектурно-строительная компания, использующая современные технологии, которая создаёт прозрачные, дизайн-ориентированные проекты с точностью программного обеспечения.",
   },
 
   // Home — sections
