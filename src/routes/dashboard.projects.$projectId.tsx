@@ -6,6 +6,12 @@ import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
 import { inviteClientToProject } from "@/server/portal.functions";
 import {
+  ScopeChecklistAdmin,
+  DocumentsAdmin,
+  UpdatesAdmin,
+  KnowledgeAdmin,
+} from "@/components/dashboard/ProjectCollab";
+import {
   ArrowLeft,
   Plus,
   Trash2,
