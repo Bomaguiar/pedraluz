@@ -20,7 +20,7 @@ export const Route = createFileRoute("/portal/$projectId")({
   component: PortalProjectPage,
 });
 
-type Tab = "proposal" | "progress" | "manager";
+type Tab = "proposal" | "scope" | "docs" | "updates" | "bot" | "progress" | "manager";
 
 function PortalProjectPage() {
   const { projectId } = Route.useParams();
