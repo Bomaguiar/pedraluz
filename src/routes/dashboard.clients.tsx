@@ -74,8 +74,8 @@ function ClientsPage() {
         </button>
       </div>
 
-      <div className="mt-10 border border-border bg-card">
-        <table className="w-full text-sm">
+      <div className="mt-10 overflow-x-auto border border-border bg-card">
+        <table className="w-full min-w-[640px] text-sm">
           <thead>
             <tr className="border-b border-border text-left">
               <th className="label-tag p-4 text-muted-foreground">Name</th>
