@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
-import { askProjectBot } from "@/server/projectCollab.functions";
+import { askProjectBot } from "@/lib/projectCollab.functions";
 import { FileText, Image as ImageIcon, CheckCircle2, Circle, Bot, Send, Loader2, ExternalLink } from "lucide-react";
 
 export function PortalScope({ projectId }: { projectId: string }) {
