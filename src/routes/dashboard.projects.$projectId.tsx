@@ -130,27 +130,29 @@ function AdminProjectDetail() {
       </div>
 
       {/* Tabs */}
-      <div className="mt-10 flex gap-1 border-b border-border">
-        {[
-          { k: "proposal", l: "Proposal" },
-          { k: "scope", l: "Scope & Checklist" },
-          { k: "docs", l: "Documents" },
-          { k: "updates", l: "Updates" },
-          { k: "knowledge", l: "Bot & Knowledge" },
-          { k: "milestones", l: "Progress milestones" },
-          { k: "clients", l: "Client access" },
-          { k: "messages", l: "Messages" },
-        ].map((t) => (
-          <button
-            key={t.k}
-            onClick={() => setTab(t.k as any)}
-            className={`border-b-2 px-5 py-3 text-xs uppercase tracking-[0.2em] ${
-              tab === t.k ? "border-[var(--brass-dark)] text-foreground" : "border-transparent text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            {t.l}
-          </button>
-        ))}
+      <div className="mt-10 -mx-4 md:mx-0 overflow-x-auto border-b border-border">
+        <div className="flex gap-1 px-4 md:px-0 min-w-max">
+          {[
+            { k: "proposal", l: "Proposal" },
+            { k: "scope", l: "Scope & Checklist" },
+            { k: "docs", l: "Documents" },
+            { k: "updates", l: "Updates" },
+            { k: "knowledge", l: "Bot & Knowledge" },
+            { k: "milestones", l: "Progress milestones" },
+            { k: "clients", l: "Client access" },
+            { k: "messages", l: "Messages" },
+          ].map((t) => (
+            <button
+              key={t.k}
+              onClick={() => setTab(t.k as any)}
+              className={`whitespace-nowrap border-b-2 px-4 py-3 text-xs uppercase tracking-[0.2em] md:px-5 ${
+                tab === t.k ? "border-[var(--brass-dark)] text-foreground" : "border-transparent text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {t.l}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="mt-8">
