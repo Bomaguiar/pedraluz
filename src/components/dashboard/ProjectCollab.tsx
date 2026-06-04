@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
-import { askProjectBot, syncGoogleDoc } from "@/server/projectCollab.functions";
+import { askProjectBot, syncGoogleDoc } from "@/lib/projectCollab.functions";
 import {
   Plus,
   Trash2,
