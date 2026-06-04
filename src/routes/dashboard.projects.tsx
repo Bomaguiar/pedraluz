@@ -71,11 +71,11 @@ function ProjectsPage() {
   });
 
   return (
-    <div className="p-10">
-      <div className="flex items-end justify-between">
+    <div className="p-4 md:p-10">
+      <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="label-tag text-[var(--brass-dark)]">Pipeline</p>
-          <h1 className="font-display mt-2 text-4xl">Projects</h1>
+          <h1 className="font-display mt-2 text-3xl md:text-4xl">Projects</h1>
         </div>
         <button
           type="button"

@@ -59,11 +59,11 @@ function ClientsPage() {
   });
 
   return (
-    <div className="p-10">
-      <div className="flex items-end justify-between">
+    <div className="p-4 md:p-10">
+      <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="label-tag text-[var(--brass-dark)]">CRM</p>
-          <h1 className="font-display mt-2 text-4xl">Clients</h1>
+          <h1 className="font-display mt-2 text-3xl md:text-4xl">Clients</h1>
         </div>
         <button
           type="button"
@@ -74,8 +74,8 @@ function ClientsPage() {
         </button>
       </div>
 
-      <div className="mt-10 border border-border bg-card">
-        <table className="w-full text-sm">
+      <div className="mt-10 overflow-x-auto border border-border bg-card">
+        <table className="w-full min-w-[640px] text-sm">
           <thead>
             <tr className="border-b border-border text-left">
               <th className="label-tag p-4 text-muted-foreground">Name</th>

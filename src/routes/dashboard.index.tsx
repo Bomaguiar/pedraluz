@@ -33,11 +33,11 @@ function OverviewPage() {
   const newInquiries = (clients.data ?? []).filter((c) => c.status === "inquiry").length;
 
   return (
-    <div className="p-10">
-      <div className="flex items-end justify-between">
+    <div className="p-4 md:p-10">
+      <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="label-tag text-[var(--brass-dark)]">Overview</p>
-          <h1 className="font-display mt-2 text-4xl">Studio dashboard</h1>
+          <h1 className="font-display mt-2 text-3xl md:text-4xl">Studio dashboard</h1>
         </div>
       </div>
 
