@@ -193,16 +193,16 @@
   }
 
   .reveal-up {
-    animation: reveal-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: reveal-up 0.6s var(--ease-out-quart) both;
   }
 
   @keyframes reveal-up {
-    from { opacity: 0; transform: translateY(24px); }
+    from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
   .fade-in {
-    animation: fade-in 0.8s ease-out both;
+    animation: fade-in 0.5s var(--ease-out-quart) both;
   }
 
   @keyframes fade-in {
@@ -210,9 +210,20 @@
     to   { opacity: 1; }
   }
 
+  /* Scale + fade entry — origin-aware. Override transform-origin per usage. */
+  .scale-in {
+    animation: scale-in 220ms var(--ease-out-quart) both;
+  }
+
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.96); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
   .img-warm {
     filter: saturate(0.92) contrast(1.02);
   }
+
 
   .container-edge {
     max-width: 1280px;
