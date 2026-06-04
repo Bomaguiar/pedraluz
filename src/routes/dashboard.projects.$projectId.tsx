@@ -68,17 +68,17 @@ function AdminProjectDetail() {
   });
 
   if (projectQ.isLoading)
-    return <div className="p-10 text-sm text-muted-foreground">Loading…</div>;
-  if (!projectQ.data) return <div className="p-10">Project not found</div>;
+    return <div className="p-4 md:p-10 text-sm text-muted-foreground">Loading…</div>;
+  if (!projectQ.data) return <div className="p-4 md:p-10">Project not found</div>;
   const p = projectQ.data as any;
 
   return (
-    <div className="p-10">
+    <div className="p-4 md:p-10">
       <Link to="/dashboard/projects" className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground">
         <ArrowLeft className="h-3 w-3" /> All projects
       </Link>
 
-      <div className="mt-6 flex items-end justify-between">
+      <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="label-tag text-[var(--brass-dark)] capitalize">{p.stage}</p>
           <h1 className="font-display mt-2 text-4xl">{p.name}</h1>
