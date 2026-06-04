@@ -4,6 +4,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import {
+  PortalScope,
+  PortalDocuments,
+  PortalUpdates,
+  PortalBot,
+} from "@/components/portal/PortalCollab";
+import {
   ArrowLeft,
   CheckCircle2,
   Circle,
@@ -14,13 +20,15 @@ import {
   Phone,
   Send,
   Loader2,
+  Image as ImageIcon,
+  Bot,
 } from "lucide-react";
 
 export const Route = createFileRoute("/portal/$projectId")({
   component: PortalProjectPage,
 });
 
-type Tab = "proposal" | "progress" | "manager";
+type Tab = "proposal" | "scope" | "docs" | "updates" | "bot" | "progress" | "manager";
 
 function PortalProjectPage() {
   const { projectId } = Route.useParams();
@@ -85,16 +93,24 @@ function PortalProjectPage() {
 
       {/* Tabs */}
       <div className="sticky top-[57px] z-20 border-b border-border bg-background">
-        <div className="mx-auto flex max-w-6xl gap-1 px-6">
+        <div className="mx-auto flex max-w-6xl flex-wrap gap-1 px-6">
           <TabButton active={tab === "proposal"} onClick={() => setTab("proposal")} icon={FileText} label="Proposal" />
+          <TabButton active={tab === "scope"} onClick={() => setTab("scope")} icon={ListChecks} label="Scope & Checklist" />
+          <TabButton active={tab === "docs"} onClick={() => setTab("docs")} icon={FileText} label="Documents" />
+          <TabButton active={tab === "updates"} onClick={() => setTab("updates")} icon={ImageIcon} label="Updates" />
           <TabButton active={tab === "progress"} onClick={() => setTab("progress")} icon={ListChecks} label="Progress" />
+          <TabButton active={tab === "bot"} onClick={() => setTab("bot")} icon={Bot} label="Ask" />
           <TabButton active={tab === "manager"} onClick={() => setTab("manager")} icon={MessageSquare} label="Project Manager" />
         </div>
       </div>
 
       <div className="mx-auto max-w-6xl px-6 py-12">
         {tab === "proposal" && <ProposalTab projectId={projectId} project={p} />}
+        {tab === "scope" && <PortalScope projectId={projectId} />}
+        {tab === "docs" && <PortalDocuments projectId={projectId} />}
+        {tab === "updates" && <PortalUpdates projectId={projectId} />}
         {tab === "progress" && <ProgressTab projectId={projectId} />}
+        {tab === "bot" && <PortalBot projectId={projectId} />}
         {tab === "manager" && <ManagerTab projectId={projectId} manager={p.project_managers} />}
       </div>
     </div>
