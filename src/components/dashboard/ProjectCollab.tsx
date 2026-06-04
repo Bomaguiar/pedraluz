@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
-import { askProjectBot } from "@/server/projectCollab.functions";
+import { askProjectBot, syncGoogleDoc } from "@/server/projectCollab.functions";
 import {
   Plus,
   Trash2,
@@ -20,6 +20,7 @@ import {
   Eye,
   EyeOff,
   BookOpen,
+  RefreshCw,
 } from "lucide-react";
 
 /* ─────────────── SCOPE & CHECKLIST ─────────────── */
@@ -281,6 +282,16 @@ export function DocumentsAdmin({ projectId }: { projectId: string }) {
     onSuccess: () => qc.invalidateQueries({ queryKey: ["admin-docs", projectId] }),
   });
 
+  const syncFn = useServerFn(syncGoogleDoc);
+  const syncDoc = useMutation({
+    mutationFn: async (documentId: string) => syncFn({ data: { documentId } }),
+    onSuccess: (r: any) => {
+      toast.success(`Synced ${r?.chars ?? 0} chars into the bot's knowledge`);
+      qc.invalidateQueries({ queryKey: ["admin-knowledge", projectId] });
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
   return (
     <div className="space-y-6">
       <div className="grid gap-4 border border-border bg-card p-6 sm:grid-cols-2">
@@ -363,6 +374,21 @@ export function DocumentsAdmin({ projectId }: { projectId: string }) {
                   <span className="text-[var(--brass-dark)]">
                     ✓ Signed by {d.signed_off_by_name} on {new Date(d.client_signed_off_at).toLocaleDateString()}
                   </span>
+                )}
+                {d.kind === "google_doc" && d.external_url && (
+                  <button
+                    onClick={() => syncDoc.mutate(d.id)}
+                    disabled={syncDoc.isPending && syncDoc.variables === d.id}
+                    className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground disabled:opacity-60"
+                    title="Fetch the Google Doc text so the project bot can read it"
+                  >
+                    {syncDoc.isPending && syncDoc.variables === d.id ? (
+                      <Loader2 className="h-3 w-3 animate-spin" />
+                    ) : (
+                      <RefreshCw className="h-3 w-3" />
+                    )}
+                    Sync content
+                  </button>
                 )}
               </div>
             </div>
