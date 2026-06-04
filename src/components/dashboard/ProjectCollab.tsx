@@ -30,13 +30,16 @@ export function ScopeChecklistAdmin({ projectId }: { projectId: string }) {
   const scopeQ = useQuery({
     queryKey: ["admin-scope", projectId],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("project_scope")
-        .select("*")
-        .eq("project_id", projectId)
-        .maybeSingle();
-      if (error) throw error;
-      return data;
+      const [scopeRes, internalRes] = await Promise.all([
+        supabase.from("project_scope").select("*").eq("project_id", projectId).maybeSingle(),
+        supabase.from("project_scope_internal").select("internal_notes").eq("project_id", projectId).maybeSingle(),
+      ]);
+      if (scopeRes.error) throw scopeRes.error;
+      if (internalRes.error) throw internalRes.error;
+      return {
+        client_needs: scopeRes.data?.client_needs ?? "",
+        internal_notes: internalRes.data?.internal_notes ?? "",
+      };
     },
   });
   const checklistQ = useQuery({
@@ -63,11 +66,14 @@ export function ScopeChecklistAdmin({ projectId }: { projectId: string }) {
 
   const saveScope = useMutation({
     mutationFn: async () => {
-      const payload = { project_id: projectId, client_needs: clientNeeds, internal_notes: internalNotes };
-      const { error } = await supabase
+      const { error: e1 } = await supabase
         .from("project_scope")
-        .upsert(payload, { onConflict: "project_id" });
-      if (error) throw error;
+        .upsert({ project_id: projectId, client_needs: clientNeeds }, { onConflict: "project_id" });
+      if (e1) throw e1;
+      const { error: e2 } = await supabase
+        .from("project_scope_internal")
+        .upsert({ project_id: projectId, internal_notes: internalNotes }, { onConflict: "project_id" });
+      if (e2) throw e2;
     },
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["admin-scope", projectId] });
