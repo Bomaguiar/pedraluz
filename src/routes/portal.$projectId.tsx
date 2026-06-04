@@ -4,6 +4,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import {
+  PortalScope,
+  PortalDocuments,
+  PortalUpdates,
+  PortalBot,
+} from "@/components/portal/PortalCollab";
+import {
   ArrowLeft,
   CheckCircle2,
   Circle,
@@ -14,6 +20,8 @@ import {
   Phone,
   Send,
   Loader2,
+  Image as ImageIcon,
+  Bot,
 } from "lucide-react";
 
 export const Route = createFileRoute("/portal/$projectId")({
