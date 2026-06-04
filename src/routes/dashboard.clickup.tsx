@@ -95,7 +95,7 @@ function ClickUpSettingsPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="label-tag text-[var(--brass-dark)]">Integrations</p>
-          <h1 className="font-display mt-2 text-4xl">ClickUp</h1>
+          <h1 className="font-display mt-2 text-3xl md:text-4xl">ClickUp</h1>
           <p className="mt-2 max-w-xl text-sm text-muted-foreground">
             Two-way sync of <strong>Clients → ClickUp Lists</strong>. Each new client becomes a List
             under your selected Space (or Folder), and ClickUp task changes flow back via webhook.

@@ -81,7 +81,7 @@ function AdminProjectDetail() {
       <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="label-tag text-[var(--brass-dark)] capitalize">{p.stage}</p>
-          <h1 className="font-display mt-2 text-4xl">{p.name}</h1>
+          <h1 className="font-display mt-2 text-3xl md:text-4xl">{p.name}</h1>
           {p.clients?.name && (
             <p className="mt-1 text-sm text-muted-foreground">Client: {p.clients.name}</p>
           )}

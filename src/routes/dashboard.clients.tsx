@@ -63,7 +63,7 @@ function ClientsPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="label-tag text-[var(--brass-dark)]">CRM</p>
-          <h1 className="font-display mt-2 text-4xl">Clients</h1>
+          <h1 className="font-display mt-2 text-3xl md:text-4xl">Clients</h1>
         </div>
         <button
           type="button"

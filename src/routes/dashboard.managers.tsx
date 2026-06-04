@@ -59,7 +59,7 @@ function ManagersPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="label-tag text-[var(--brass-dark)]">Team</p>
-          <h1 className="font-display mt-2 text-4xl">Project Managers</h1>
+          <h1 className="font-display mt-2 text-3xl md:text-4xl">Project Managers</h1>
         </div>
         <button
           onClick={() => setOpen(true)}

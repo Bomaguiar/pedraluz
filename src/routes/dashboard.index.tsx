@@ -37,7 +37,7 @@ function OverviewPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="label-tag text-[var(--brass-dark)]">Overview</p>
-          <h1 className="font-display mt-2 text-4xl">Studio dashboard</h1>
+          <h1 className="font-display mt-2 text-3xl md:text-4xl">Studio dashboard</h1>
         </div>
       </div>
 
