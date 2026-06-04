@@ -30,7 +30,7 @@ export const Route = createFileRoute("/dashboard/projects/$projectId")({
 
 function AdminProjectDetail() {
   const { projectId } = Route.useParams();
-  const [tab, setTab] = useState<"proposal" | "milestones" | "clients" | "messages">("proposal");
+  const [tab, setTab] = useState<"proposal" | "scope" | "docs" | "updates" | "knowledge" | "milestones" | "clients" | "messages">("proposal");
 
   const projectQ = useQuery({
     queryKey: ["admin-project", projectId],
