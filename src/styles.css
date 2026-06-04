@@ -152,6 +152,33 @@
     background-color: var(--brass);
     color: var(--brass-foreground);
   }
+
+  /* Press feedback — every pressable surface reacts instantly */
+  button,
+  a,
+  [role="button"],
+  [type="button"],
+  [type="submit"] {
+    transition: transform 160ms var(--ease-out-quart);
+  }
+
+  button:active,
+  a:active,
+  [role="button"]:active,
+  [type="button"]:active,
+  [type="submit"]:active {
+    transform: scale(0.97);
+  }
+
+  /* Respect users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
 
 @layer utilities {
