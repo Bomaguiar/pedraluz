@@ -461,7 +461,6 @@ export type Database = {
           client_needs: string | null
           created_at: string
           id: string
-          internal_notes: string | null
           project_id: string
           updated_at: string
         }
@@ -469,7 +468,6 @@ export type Database = {
           client_needs?: string | null
           created_at?: string
           id?: string
-          internal_notes?: string | null
           project_id: string
           updated_at?: string
         }
@@ -477,7 +475,6 @@ export type Database = {
           client_needs?: string | null
           created_at?: string
           id?: string
-          internal_notes?: string | null
           project_id?: string
           updated_at?: string
         }
@@ -490,6 +487,30 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      project_scope_internal: {
+        Row: {
+          created_at: string
+          id: string
+          internal_notes: string | null
+          project_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          internal_notes?: string | null
+          project_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          internal_notes?: string | null
+          project_id?: string
+          updated_at?: string
+        }
+        Relationships: []
       }
       project_update_photos: {
         Row: {

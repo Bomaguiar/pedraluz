@@ -22,7 +22,7 @@ export const askProjectBot = createServerFn({ method: "POST" })
     // Pull project context (relies on RLS — admin or assigned client can read)
     const [project, scope, checklist, docs, updates, knowledge] = await Promise.all([
       supabase.from("projects").select("name, address, stage, service_type, due_date, notes, founder_name").eq("id", data.projectId).maybeSingle(),
-      supabase.from("project_scope").select("client_needs, internal_notes").eq("project_id", data.projectId).maybeSingle(),
+      supabase.from("project_scope").select("client_needs").eq("project_id", data.projectId).maybeSingle(),
       supabase.from("project_checklist_items").select("title, description, category, done, requires_client_signoff, client_signed_off").eq("project_id", data.projectId).order("sort_order"),
       supabase.from("project_documents").select("title, description, kind, external_url, awaiting_signoff, client_signed_off").eq("project_id", data.projectId).order("created_at", { ascending: false }),
       supabase.from("project_updates").select("title, body, created_at").eq("project_id", data.projectId).order("created_at", { ascending: false }).limit(20),
