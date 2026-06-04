@@ -10,7 +10,7 @@ import {
   clickupListFolders,
   clickupSaveSettings,
   clickupGetSettings,
-} from "@/server/clickup.functions";
+} from "@/lib/clickup.functions";
 
 export const Route = createFileRoute("/dashboard/clickup")({
   head: () => ({ meta: [{ title: "ClickUp Integration — Pedra & Luz" }] }),

@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useState, useEffect, useRef } from "react";
 import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
-import { inviteClientToProject } from "@/server/portal.functions";
+import { inviteClientToProject } from "@/lib/portal.functions";
 import {
   ScopeChecklistAdmin,
   DocumentsAdmin,
