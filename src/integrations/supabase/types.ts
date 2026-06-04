@@ -134,6 +134,68 @@ export type Database = {
         }
         Relationships: []
       }
+      project_checklist_items: {
+        Row: {
+          category: string | null
+          client_signed_off: boolean
+          client_signed_off_at: string | null
+          created_at: string
+          description: string | null
+          done: boolean
+          done_at: string | null
+          id: string
+          project_id: string
+          requires_client_signoff: boolean
+          signed_off_by_name: string | null
+          sort_order: number
+          title: string
+          updated_at: string
+          visible_to_client: boolean
+        }
+        Insert: {
+          category?: string | null
+          client_signed_off?: boolean
+          client_signed_off_at?: string | null
+          created_at?: string
+          description?: string | null
+          done?: boolean
+          done_at?: string | null
+          id?: string
+          project_id: string
+          requires_client_signoff?: boolean
+          signed_off_by_name?: string | null
+          sort_order?: number
+          title: string
+          updated_at?: string
+          visible_to_client?: boolean
+        }
+        Update: {
+          category?: string | null
+          client_signed_off?: boolean
+          client_signed_off_at?: string | null
+          created_at?: string
+          description?: string | null
+          done?: boolean
+          done_at?: string | null
+          id?: string
+          project_id?: string
+          requires_client_signoff?: boolean
+          signed_off_by_name?: string | null
+          sort_order?: number
+          title?: string
+          updated_at?: string
+          visible_to_client?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_checklist_items_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       project_clients: {
         Row: {
           client_id: string | null
@@ -166,6 +228,106 @@ export type Database = {
           },
           {
             foreignKeyName: "project_clients_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_documents: {
+        Row: {
+          awaiting_signoff: boolean
+          client_signed_off: boolean
+          client_signed_off_at: string | null
+          created_at: string
+          description: string | null
+          external_url: string | null
+          file_url: string | null
+          id: string
+          kind: string
+          mime_type: string | null
+          project_id: string
+          signed_off_by_name: string | null
+          title: string
+          updated_at: string
+          uploaded_by: string | null
+          visible_to_client: boolean
+        }
+        Insert: {
+          awaiting_signoff?: boolean
+          client_signed_off?: boolean
+          client_signed_off_at?: string | null
+          created_at?: string
+          description?: string | null
+          external_url?: string | null
+          file_url?: string | null
+          id?: string
+          kind?: string
+          mime_type?: string | null
+          project_id: string
+          signed_off_by_name?: string | null
+          title: string
+          updated_at?: string
+          uploaded_by?: string | null
+          visible_to_client?: boolean
+        }
+        Update: {
+          awaiting_signoff?: boolean
+          client_signed_off?: boolean
+          client_signed_off_at?: string | null
+          created_at?: string
+          description?: string | null
+          external_url?: string | null
+          file_url?: string | null
+          id?: string
+          kind?: string
+          mime_type?: string | null
+          project_id?: string
+          signed_off_by_name?: string | null
+          title?: string
+          updated_at?: string
+          uploaded_by?: string | null
+          visible_to_client?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_documents_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_knowledge: {
+        Row: {
+          content: string
+          created_at: string
+          created_by: string | null
+          id: string
+          project_id: string
+          source: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          project_id: string
+          source?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          project_id?: string
+          source?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_knowledge_project_id_fkey"
             columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "projects"
@@ -287,6 +449,123 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "project_milestones_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_scope: {
+        Row: {
+          client_needs: string | null
+          created_at: string
+          id: string
+          internal_notes: string | null
+          project_id: string
+          updated_at: string
+        }
+        Insert: {
+          client_needs?: string | null
+          created_at?: string
+          id?: string
+          internal_notes?: string | null
+          project_id: string
+          updated_at?: string
+        }
+        Update: {
+          client_needs?: string | null
+          created_at?: string
+          id?: string
+          internal_notes?: string | null
+          project_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_scope_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: true
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_update_photos: {
+        Row: {
+          caption: string | null
+          created_at: string
+          id: string
+          photo_url: string
+          sort_order: number
+          update_id: string
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          photo_url: string
+          sort_order?: number
+          update_id: string
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          photo_url?: string
+          sort_order?: number
+          update_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_update_photos_update_id_fkey"
+            columns: ["update_id"]
+            isOneToOne: false
+            referencedRelation: "project_updates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_updates: {
+        Row: {
+          author_id: string | null
+          author_name: string | null
+          body: string | null
+          created_at: string
+          id: string
+          notify_client: boolean
+          project_id: string
+          title: string
+          updated_at: string
+          visible_to_client: boolean
+        }
+        Insert: {
+          author_id?: string | null
+          author_name?: string | null
+          body?: string | null
+          created_at?: string
+          id?: string
+          notify_client?: boolean
+          project_id: string
+          title: string
+          updated_at?: string
+          visible_to_client?: boolean
+        }
+        Update: {
+          author_id?: string | null
+          author_name?: string | null
+          body?: string | null
+          created_at?: string
+          id?: string
+          notify_client?: boolean
+          project_id?: string
+          title?: string
+          updated_at?: string
+          visible_to_client?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_updates_project_id_fkey"
             columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "projects"
