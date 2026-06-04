@@ -71,3 +71,96 @@ ${JSON.stringify(ctx, null, 2)}`;
     const answer: string = json.choices?.[0]?.message?.content ?? "(no response)";
     return { answer };
   });
+
+/* ─────────── Google Docs sync ─────────── */
+
+const SyncInput = z.object({ documentId: z.string().uuid() });
+
+function extractDocId(url: string): string | null {
+  const m = url.match(/\/document\/d\/([a-zA-Z0-9_-]+)/);
+  return m ? m[1] : null;
+}
+
+type GDocElement = {
+  paragraph?: {
+    elements?: Array<{ textRun?: { content?: string } }>;
+  };
+  table?: {
+    tableRows?: Array<{
+      tableCells?: Array<{ content?: GDocElement[] }>;
+    }>;
+  };
+};
+
+function extractText(content: GDocElement[] | undefined): string {
+  if (!content) return "";
+  let out = "";
+  for (const el of content) {
+    if (el.paragraph?.elements) {
+      for (const e of el.paragraph.elements) {
+        if (e.textRun?.content) out += e.textRun.content;
+      }
+    } else if (el.table?.tableRows) {
+      for (const row of el.table.tableRows) {
+        for (const cell of row.tableCells ?? []) {
+          out += extractText(cell.content);
+        }
+      }
+    }
+  }
+  return out;
+}
+
+export const syncGoogleDoc = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d: unknown) => SyncInput.parse(d))
+  .handler(async ({ data, context }) => {
+    const { supabase } = context;
+    const lovableKey = process.env.LOVABLE_API_KEY;
+    const gdocsKey = process.env.GOOGLE_DOCS_API_KEY;
+    if (!lovableKey || !gdocsKey) throw new Error("Google Docs connector not configured");
+
+    const { data: doc, error } = await supabase
+      .from("project_documents")
+      .select("id, project_id, title, external_url")
+      .eq("id", data.documentId)
+      .maybeSingle();
+    if (error) throw error;
+    if (!doc) throw new Error("Document not found or access denied");
+    if (!doc.external_url) throw new Error("Document has no Google Doc URL");
+
+    const docId = extractDocId(doc.external_url);
+    if (!docId) throw new Error("Could not parse Google Doc ID from URL");
+
+    const res = await fetch(`https://connector-gateway.lovable.dev/google_docs/v1/documents/${docId}`, {
+      headers: {
+        Authorization: `Bearer ${lovableKey}`,
+        "X-Connection-Api-Key": gdocsKey,
+      },
+    });
+    if (!res.ok) {
+      const body = await res.text();
+      throw new Error(`Google Docs fetch failed (${res.status}): ${body.slice(0, 200)}`);
+    }
+    const json: { title?: string; body?: { content?: GDocElement[] } } = await res.json();
+    const text = extractText(json.body?.content).trim();
+    if (!text) throw new Error("Document is empty");
+
+    // Replace prior synced content for this document
+    const marker = `[GDOC:${doc.id}]`;
+    await supabase
+      .from("project_knowledge")
+      .delete()
+      .eq("project_id", doc.project_id)
+      .like("content", `${marker}%`);
+
+    const content = `${marker} ${json.title ?? doc.title}\n\n${text}`.slice(0, 50000);
+    const { error: insErr } = await supabase.from("project_knowledge").insert({
+      project_id: doc.project_id,
+      source: "google_doc",
+      content,
+    });
+    if (insErr) throw insErr;
+
+    return { ok: true, chars: text.length };
+  });
