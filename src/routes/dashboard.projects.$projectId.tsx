@@ -133,6 +133,10 @@ function AdminProjectDetail() {
       <div className="mt-10 flex gap-1 border-b border-border">
         {[
           { k: "proposal", l: "Proposal" },
+          { k: "scope", l: "Scope & Checklist" },
+          { k: "docs", l: "Documents" },
+          { k: "updates", l: "Updates" },
+          { k: "knowledge", l: "Bot & Knowledge" },
           { k: "milestones", l: "Progress milestones" },
           { k: "clients", l: "Client access" },
           { k: "messages", l: "Messages" },
@@ -151,6 +155,10 @@ function AdminProjectDetail() {
 
       <div className="mt-8">
         {tab === "proposal" && <ProposalEditor projectId={projectId} project={p} />}
+        {tab === "scope" && <ScopeChecklistAdmin projectId={projectId} />}
+        {tab === "docs" && <DocumentsAdmin projectId={projectId} />}
+        {tab === "updates" && <UpdatesAdmin projectId={projectId} />}
+        {tab === "knowledge" && <KnowledgeAdmin projectId={projectId} />}
         {tab === "milestones" && <MilestonesEditor projectId={projectId} />}
         {tab === "clients" && <ClientsAccess projectId={projectId} project={p} />}
         {tab === "messages" && <MessagesAdmin projectId={projectId} />}
