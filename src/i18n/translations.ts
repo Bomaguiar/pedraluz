@@ -14,6 +14,7 @@ export const translations = {
   "nav.portfolio": { en: "Portfolio", pt: "Portefólio", fr: "Portfolio", ru: "Портфолио" },
   "nav.about": { en: "About", pt: "Sobre", fr: "À propos", ru: "О нас" },
   "nav.partners": { en: "Partners", pt: "Parceiros", fr: "Partenaires", ru: "Партнёры" },
+  "nav.yoga": { en: "Yoga", pt: "Yoga", fr: "Yoga", ru: "Йога" },
   "nav.book": { en: "Book Consultation", pt: "Marcar Consulta", fr: "Réserver une consultation", ru: "Записаться на консультацию" },
 
   // Footer
