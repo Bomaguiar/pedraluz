@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as YogaRouteImport } from './routes/yoga'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
@@ -34,6 +35,11 @@ import { Route as DashboardClickupRouteImport } from './routes/dashboard.clickup
 import { Route as DashboardProjectsProjectIdRouteImport } from './routes/dashboard.projects.$projectId'
 import { Route as ApiPublicClickupWebhookRouteImport } from './routes/api/public/clickup-webhook'
 
+const YogaRoute = YogaRouteImport.update({
+  id: '/yoga',
+  path: '/yoga',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
@@ -167,6 +173,7 @@ export interface FileRoutesByFullPath {
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRouteWithChildren
+  '/yoga': typeof YogaRoute
   '/dashboard/clickup': typeof DashboardClickupRoute
   '/dashboard/clients': typeof DashboardClientsRoute
   '/dashboard/managers': typeof DashboardManagersRoute
@@ -191,6 +198,7 @@ export interface FileRoutesByTo {
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRouteWithChildren
+  '/yoga': typeof YogaRoute
   '/dashboard/clickup': typeof DashboardClickupRoute
   '/dashboard/clients': typeof DashboardClientsRoute
   '/dashboard/managers': typeof DashboardManagersRoute
@@ -218,6 +226,7 @@ export interface FileRoutesById {
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRouteWithChildren
+  '/yoga': typeof YogaRoute
   '/dashboard/clickup': typeof DashboardClickupRoute
   '/dashboard/clients': typeof DashboardClientsRoute
   '/dashboard/managers': typeof DashboardManagersRoute
@@ -246,6 +255,7 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/process'
     | '/services'
+    | '/yoga'
     | '/dashboard/clickup'
     | '/dashboard/clients'
     | '/dashboard/managers'
@@ -270,6 +280,7 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/process'
     | '/services'
+    | '/yoga'
     | '/dashboard/clickup'
     | '/dashboard/clients'
     | '/dashboard/managers'
@@ -296,6 +307,7 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/process'
     | '/services'
+    | '/yoga'
     | '/dashboard/clickup'
     | '/dashboard/clients'
     | '/dashboard/managers'
@@ -323,12 +335,20 @@ export interface RootRouteChildren {
   PortfolioRoute: typeof PortfolioRoute
   ProcessRoute: typeof ProcessRoute
   ServicesRoute: typeof ServicesRouteWithChildren
+  YogaRoute: typeof YogaRoute
   ProposalsYuliaRoute: typeof ProposalsYuliaRoute
   ApiPublicClickupWebhookRoute: typeof ApiPublicClickupWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/yoga': {
+      id: '/yoga'
+      path: '/yoga'
+      fullPath: '/yoga'
+      preLoaderRoute: typeof YogaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services': {
       id: '/services'
       path: '/services'
@@ -573,6 +593,7 @@ const rootRouteChildren: RootRouteChildren = {
   PortfolioRoute: PortfolioRoute,
   ProcessRoute: ProcessRoute,
   ServicesRoute: ServicesRouteWithChildren,
+  YogaRoute: YogaRoute,
   ProposalsYuliaRoute: ProposalsYuliaRoute,
   ApiPublicClickupWebhookRoute: ApiPublicClickupWebhookRoute,
 }
