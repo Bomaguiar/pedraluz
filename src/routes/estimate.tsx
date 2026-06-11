@@ -139,7 +139,7 @@ function EstimatePage() {
       </section>
 
       <section className="container-edge py-20">
-        {step > 0 && step < 4 && <Progress current={step} />}
+        {step > 0 && step < 4 && <Progress current={step as 1 | 2 | 3} />}
 
         {step === 0 && (
           <div className="max-w-3xl">

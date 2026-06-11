@@ -14,6 +14,7 @@ import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as PortalRouteImport } from './routes/portal'
 import { Route as PartnersRouteImport } from './routes/partners'
+import { Route as EstimateRouteImport } from './routes/estimate'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -57,6 +58,11 @@ const PortalRoute = PortalRouteImport.update({
 const PartnersRoute = PartnersRouteImport.update({
   id: '/partners',
   path: '/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstimateRoute = EstimateRouteImport.update({
+  id: '/estimate',
+  path: '/estimate',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -162,6 +168,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/estimate': typeof EstimateRoute
   '/partners': typeof PartnersRoute
   '/portal': typeof PortalRouteWithChildren
   '/portfolio': typeof PortfolioRoute
@@ -187,6 +194,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/estimate': typeof EstimateRoute
   '/partners': typeof PartnersRoute
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
@@ -213,6 +221,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/estimate': typeof EstimateRoute
   '/partners': typeof PartnersRoute
   '/portal': typeof PortalRouteWithChildren
   '/portfolio': typeof PortfolioRoute
@@ -241,6 +250,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contact'
     | '/dashboard'
+    | '/estimate'
     | '/partners'
     | '/portal'
     | '/portfolio'
@@ -266,6 +276,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/auth'
     | '/contact'
+    | '/estimate'
     | '/partners'
     | '/portfolio'
     | '/process'
@@ -291,6 +302,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contact'
     | '/dashboard'
+    | '/estimate'
     | '/partners'
     | '/portal'
     | '/portfolio'
@@ -318,6 +330,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRouteWithChildren
+  EstimateRoute: typeof EstimateRoute
   PartnersRoute: typeof PartnersRoute
   PortalRoute: typeof PortalRouteWithChildren
   PortfolioRoute: typeof PortfolioRoute
@@ -362,6 +375,13 @@ declare module '@tanstack/react-router' {
       path: '/partners'
       fullPath: '/partners'
       preLoaderRoute: typeof PartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estimate': {
+      id: '/estimate'
+      path: '/estimate'
+      fullPath: '/estimate'
+      preLoaderRoute: typeof EstimateRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -568,6 +588,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRouteWithChildren,
+  EstimateRoute: EstimateRoute,
   PartnersRoute: PartnersRoute,
   PortalRoute: PortalRouteWithChildren,
   PortfolioRoute: PortfolioRoute,
