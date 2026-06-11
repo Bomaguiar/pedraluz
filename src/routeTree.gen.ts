@@ -9,12 +9,12 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as YogaRouteImport } from './routes/yoga'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as PortalRouteImport } from './routes/portal'
 import { Route as PartnersRouteImport } from './routes/partners'
+import { Route as EstimateRouteImport } from './routes/estimate'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -35,11 +35,6 @@ import { Route as DashboardClickupRouteImport } from './routes/dashboard.clickup
 import { Route as DashboardProjectsProjectIdRouteImport } from './routes/dashboard.projects.$projectId'
 import { Route as ApiPublicClickupWebhookRouteImport } from './routes/api/public/clickup-webhook'
 
-const YogaRoute = YogaRouteImport.update({
-  id: '/yoga',
-  path: '/yoga',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
@@ -63,6 +58,11 @@ const PortalRoute = PortalRouteImport.update({
 const PartnersRoute = PartnersRouteImport.update({
   id: '/partners',
   path: '/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstimateRoute = EstimateRouteImport.update({
+  id: '/estimate',
+  path: '/estimate',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -168,12 +168,12 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/estimate': typeof EstimateRoute
   '/partners': typeof PartnersRoute
   '/portal': typeof PortalRouteWithChildren
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRouteWithChildren
-  '/yoga': typeof YogaRoute
   '/dashboard/clickup': typeof DashboardClickupRoute
   '/dashboard/clients': typeof DashboardClientsRoute
   '/dashboard/managers': typeof DashboardManagersRoute
@@ -194,11 +194,11 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/estimate': typeof EstimateRoute
   '/partners': typeof PartnersRoute
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRouteWithChildren
-  '/yoga': typeof YogaRoute
   '/dashboard/clickup': typeof DashboardClickupRoute
   '/dashboard/clients': typeof DashboardClientsRoute
   '/dashboard/managers': typeof DashboardManagersRoute
@@ -221,12 +221,12 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/estimate': typeof EstimateRoute
   '/partners': typeof PartnersRoute
   '/portal': typeof PortalRouteWithChildren
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
   '/services': typeof ServicesRouteWithChildren
-  '/yoga': typeof YogaRoute
   '/dashboard/clickup': typeof DashboardClickupRoute
   '/dashboard/clients': typeof DashboardClientsRoute
   '/dashboard/managers': typeof DashboardManagersRoute
@@ -250,12 +250,12 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contact'
     | '/dashboard'
+    | '/estimate'
     | '/partners'
     | '/portal'
     | '/portfolio'
     | '/process'
     | '/services'
-    | '/yoga'
     | '/dashboard/clickup'
     | '/dashboard/clients'
     | '/dashboard/managers'
@@ -276,11 +276,11 @@ export interface FileRouteTypes {
     | '/about'
     | '/auth'
     | '/contact'
+    | '/estimate'
     | '/partners'
     | '/portfolio'
     | '/process'
     | '/services'
-    | '/yoga'
     | '/dashboard/clickup'
     | '/dashboard/clients'
     | '/dashboard/managers'
@@ -302,12 +302,12 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contact'
     | '/dashboard'
+    | '/estimate'
     | '/partners'
     | '/portal'
     | '/portfolio'
     | '/process'
     | '/services'
-    | '/yoga'
     | '/dashboard/clickup'
     | '/dashboard/clients'
     | '/dashboard/managers'
@@ -330,25 +330,18 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRouteWithChildren
+  EstimateRoute: typeof EstimateRoute
   PartnersRoute: typeof PartnersRoute
   PortalRoute: typeof PortalRouteWithChildren
   PortfolioRoute: typeof PortfolioRoute
   ProcessRoute: typeof ProcessRoute
   ServicesRoute: typeof ServicesRouteWithChildren
-  YogaRoute: typeof YogaRoute
   ProposalsYuliaRoute: typeof ProposalsYuliaRoute
   ApiPublicClickupWebhookRoute: typeof ApiPublicClickupWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/yoga': {
-      id: '/yoga'
-      path: '/yoga'
-      fullPath: '/yoga'
-      preLoaderRoute: typeof YogaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/services': {
       id: '/services'
       path: '/services'
@@ -382,6 +375,13 @@ declare module '@tanstack/react-router' {
       path: '/partners'
       fullPath: '/partners'
       preLoaderRoute: typeof PartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estimate': {
+      id: '/estimate'
+      path: '/estimate'
+      fullPath: '/estimate'
+      preLoaderRoute: typeof EstimateRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -588,12 +588,12 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRouteWithChildren,
+  EstimateRoute: EstimateRoute,
   PartnersRoute: PartnersRoute,
   PortalRoute: PortalRouteWithChildren,
   PortfolioRoute: PortfolioRoute,
   ProcessRoute: ProcessRoute,
   ServicesRoute: ServicesRouteWithChildren,
-  YogaRoute: YogaRoute,
   ProposalsYuliaRoute: ProposalsYuliaRoute,
   ApiPublicClickupWebhookRoute: ApiPublicClickupWebhookRoute,
 }
