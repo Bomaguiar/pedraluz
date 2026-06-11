@@ -71,7 +71,7 @@ export function SiteHeader({ overHero = false }: { overHero?: boolean }) {
           <div className="hidden items-center gap-6 md:flex md:ml-8 lg:ml-12">
             <LanguageSwitcher tone="light" />
             <Link
-              to="/contact"
+              to="/estimate"
               className="border border-[var(--brass)] px-5 py-2.5 text-[11px] uppercase tracking-[0.18em] text-[var(--brass)] transition-all duration-300 hover:bg-[var(--brass)] hover:text-[var(--brass-foreground)]"
             >
               {t("nav.book")}
@@ -104,7 +104,7 @@ export function SiteHeader({ overHero = false }: { overHero?: boolean }) {
             </Link>
           ))}
           <Link
-            to="/contact"
+            to="/estimate"
             className="mt-4 border border-[var(--brass)] px-6 py-3 text-xs uppercase tracking-[0.18em] text-[var(--brass)]"
           >
             {t("nav.book")}
