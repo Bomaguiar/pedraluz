@@ -14,6 +14,7 @@ import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as PortalRouteImport } from './routes/portal'
 import { Route as PartnersRouteImport } from './routes/partners'
+import { Route as NewsRouteImport } from './routes/news'
 import { Route as EstimateRouteImport } from './routes/estimate'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -28,6 +29,7 @@ import { Route as ServicesHomeAdditionsRouteImport } from './routes/services.hom
 import { Route as ServicesCommercialRouteImport } from './routes/services.commercial'
 import { Route as ProposalsYuliaRouteImport } from './routes/proposals.yulia'
 import { Route as PortalProjectIdRouteImport } from './routes/portal.$projectId'
+import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 import { Route as DashboardProjectsRouteImport } from './routes/dashboard.projects'
 import { Route as DashboardManagersRouteImport } from './routes/dashboard.managers'
 import { Route as DashboardClientsRouteImport } from './routes/dashboard.clients'
@@ -58,6 +60,11 @@ const PortalRoute = PortalRouteImport.update({
 const PartnersRoute = PartnersRouteImport.update({
   id: '/partners',
   path: '/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsRoute = NewsRouteImport.update({
+  id: '/news',
+  path: '/news',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EstimateRoute = EstimateRouteImport.update({
@@ -130,6 +137,11 @@ const PortalProjectIdRoute = PortalProjectIdRouteImport.update({
   path: '/$projectId',
   getParentRoute: () => PortalRoute,
 } as any)
+const NewsSlugRoute = NewsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => NewsRoute,
+} as any)
 const DashboardProjectsRoute = DashboardProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
@@ -169,6 +181,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/estimate': typeof EstimateRoute
+  '/news': typeof NewsRouteWithChildren
   '/partners': typeof PartnersRoute
   '/portal': typeof PortalRouteWithChildren
   '/portfolio': typeof PortfolioRoute
@@ -178,6 +191,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/clients': typeof DashboardClientsRoute
   '/dashboard/managers': typeof DashboardManagersRoute
   '/dashboard/projects': typeof DashboardProjectsRouteWithChildren
+  '/news/$slug': typeof NewsSlugRoute
   '/portal/$projectId': typeof PortalProjectIdRoute
   '/proposals/yulia': typeof ProposalsYuliaRoute
   '/services/commercial': typeof ServicesCommercialRoute
@@ -195,6 +209,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/estimate': typeof EstimateRoute
+  '/news': typeof NewsRouteWithChildren
   '/partners': typeof PartnersRoute
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
@@ -203,6 +218,7 @@ export interface FileRoutesByTo {
   '/dashboard/clients': typeof DashboardClientsRoute
   '/dashboard/managers': typeof DashboardManagersRoute
   '/dashboard/projects': typeof DashboardProjectsRouteWithChildren
+  '/news/$slug': typeof NewsSlugRoute
   '/portal/$projectId': typeof PortalProjectIdRoute
   '/proposals/yulia': typeof ProposalsYuliaRoute
   '/services/commercial': typeof ServicesCommercialRoute
@@ -222,6 +238,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/estimate': typeof EstimateRoute
+  '/news': typeof NewsRouteWithChildren
   '/partners': typeof PartnersRoute
   '/portal': typeof PortalRouteWithChildren
   '/portfolio': typeof PortfolioRoute
@@ -231,6 +248,7 @@ export interface FileRoutesById {
   '/dashboard/clients': typeof DashboardClientsRoute
   '/dashboard/managers': typeof DashboardManagersRoute
   '/dashboard/projects': typeof DashboardProjectsRouteWithChildren
+  '/news/$slug': typeof NewsSlugRoute
   '/portal/$projectId': typeof PortalProjectIdRoute
   '/proposals/yulia': typeof ProposalsYuliaRoute
   '/services/commercial': typeof ServicesCommercialRoute
@@ -251,6 +269,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/estimate'
+    | '/news'
     | '/partners'
     | '/portal'
     | '/portfolio'
@@ -260,6 +279,7 @@ export interface FileRouteTypes {
     | '/dashboard/clients'
     | '/dashboard/managers'
     | '/dashboard/projects'
+    | '/news/$slug'
     | '/portal/$projectId'
     | '/proposals/yulia'
     | '/services/commercial'
@@ -277,6 +297,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contact'
     | '/estimate'
+    | '/news'
     | '/partners'
     | '/portfolio'
     | '/process'
@@ -285,6 +306,7 @@ export interface FileRouteTypes {
     | '/dashboard/clients'
     | '/dashboard/managers'
     | '/dashboard/projects'
+    | '/news/$slug'
     | '/portal/$projectId'
     | '/proposals/yulia'
     | '/services/commercial'
@@ -303,6 +325,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/estimate'
+    | '/news'
     | '/partners'
     | '/portal'
     | '/portfolio'
@@ -312,6 +335,7 @@ export interface FileRouteTypes {
     | '/dashboard/clients'
     | '/dashboard/managers'
     | '/dashboard/projects'
+    | '/news/$slug'
     | '/portal/$projectId'
     | '/proposals/yulia'
     | '/services/commercial'
@@ -331,6 +355,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRouteWithChildren
   EstimateRoute: typeof EstimateRoute
+  NewsRoute: typeof NewsRouteWithChildren
   PartnersRoute: typeof PartnersRoute
   PortalRoute: typeof PortalRouteWithChildren
   PortfolioRoute: typeof PortfolioRoute
@@ -375,6 +400,13 @@ declare module '@tanstack/react-router' {
       path: '/partners'
       fullPath: '/partners'
       preLoaderRoute: typeof PartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/estimate': {
@@ -475,6 +507,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortalProjectIdRouteImport
       parentRoute: typeof PortalRoute
     }
+    '/news/$slug': {
+      id: '/news/$slug'
+      path: '/$slug'
+      fullPath: '/news/$slug'
+      preLoaderRoute: typeof NewsSlugRouteImport
+      parentRoute: typeof NewsRoute
+    }
     '/dashboard/projects': {
       id: '/dashboard/projects'
       path: '/projects'
@@ -551,6 +590,16 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
   DashboardRouteChildren,
 )
 
+interface NewsRouteChildren {
+  NewsSlugRoute: typeof NewsSlugRoute
+}
+
+const NewsRouteChildren: NewsRouteChildren = {
+  NewsSlugRoute: NewsSlugRoute,
+}
+
+const NewsRouteWithChildren = NewsRoute._addFileChildren(NewsRouteChildren)
+
 interface PortalRouteChildren {
   PortalProjectIdRoute: typeof PortalProjectIdRoute
   PortalIndexRoute: typeof PortalIndexRoute
@@ -589,6 +638,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRouteWithChildren,
   EstimateRoute: EstimateRoute,
+  NewsRoute: NewsRouteWithChildren,
   PartnersRoute: PartnersRoute,
   PortalRoute: PortalRouteWithChildren,
   PortfolioRoute: PortfolioRoute,
