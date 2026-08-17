@@ -1,20 +1,12 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Markdown } from "@/components/site/Markdown";
 import { useLang } from "@/i18n/LanguageProvider";
 import { getNewsPost } from "@/lib/news.functions";
 
-const postQuery = (slug: string) =>
-  queryOptions({
-    queryKey: ["news", "post", slug],
-    queryFn: () => getNewsPost({ data: { slug } }),
-    staleTime: 1000 * 60 * 5,
-  });
-
 export const Route = createFileRoute("/news/$slug")({
-  loader: async ({ context, params }) => {
-    const result = await context.queryClient.ensureQueryData(postQuery(params.slug));
+  loader: async ({ params }) => {
+    const result = await getNewsPost({ data: { slug: params.slug } });
     if (!result.post) throw notFound();
     return result;
   },
@@ -43,9 +35,8 @@ export const Route = createFileRoute("/news/$slug")({
 });
 
 function NewsPostPage() {
-  const { slug } = Route.useParams();
   const { t } = useLang();
-  const { data } = useSuspenseQuery(postQuery(slug));
+  const data = Route.useLoaderData();
   const post = data.post;
   if (!post) return null;
 

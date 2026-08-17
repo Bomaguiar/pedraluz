@@ -1,16 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { PageHero } from "@/components/site/PageHero";
 import { useLang } from "@/i18n/LanguageProvider";
 import { getNewsPosts } from "@/lib/news.functions";
 import featuredImg from "@/assets/featured-project.jpg";
-
-const newsQuery = queryOptions({
-  queryKey: ["news", "list"],
-  queryFn: () => getNewsPosts(),
-  staleTime: 1000 * 60 * 5,
-});
 
 export const Route = createFileRoute("/news")({
   head: () => ({
@@ -30,7 +23,7 @@ export const Route = createFileRoute("/news")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  loader: ({ context }) => context.queryClient.ensureQueryData(newsQuery),
+  loader: () => getNewsPosts(),
   component: NewsPage,
 });
 
@@ -43,7 +36,7 @@ function formatDate(value: string | null) {
 
 function NewsPage() {
   const { t } = useLang();
-  const { data } = useSuspenseQuery(newsQuery);
+  const data = Route.useLoaderData();
   const posts = data.posts;
 
   return (
