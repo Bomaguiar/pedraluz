@@ -11,6 +11,7 @@ const NAV: { to: string; key: TranslationKey }[] = [
   { to: "/portfolio", key: "nav.portfolio" },
   { to: "/about", key: "nav.about" },
   { to: "/partners", key: "nav.partners" },
+  { to: "/news", key: "nav.news" },
 ];
 
 export function SiteHeader({ overHero = false }: { overHero?: boolean }) {
