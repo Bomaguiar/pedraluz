@@ -22,6 +22,14 @@ export const Route = createFileRoute("/news")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [
+      {
+        rel: "alternate",
+        type: "application/rss+xml",
+        title: "Pedra & Luz — News & Updates",
+        href: "/rss.xml",
+      },
+    ],
   }),
   loader: () => getNewsPosts(),
   component: NewsPage,

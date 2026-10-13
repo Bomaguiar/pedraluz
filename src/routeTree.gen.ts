@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as RssDotxmlRouteImport } from './routes/rss[.]xml'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as PortalRouteImport } from './routes/portal'
@@ -40,6 +41,11 @@ import { Route as ApiPublicClickupWebhookRouteImport } from './routes/api/public
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RssDotxmlRoute = RssDotxmlRouteImport.update({
+  id: '/rss.xml',
+  path: '/rss.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProcessRoute = ProcessRouteImport.update({
@@ -186,6 +192,7 @@ export interface FileRoutesByFullPath {
   '/portal': typeof PortalRouteWithChildren
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
+  '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRouteWithChildren
   '/dashboard/clickup': typeof DashboardClickupRoute
   '/dashboard/clients': typeof DashboardClientsRoute
@@ -213,6 +220,7 @@ export interface FileRoutesByTo {
   '/partners': typeof PartnersRoute
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
+  '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRouteWithChildren
   '/dashboard/clickup': typeof DashboardClickupRoute
   '/dashboard/clients': typeof DashboardClientsRoute
@@ -243,6 +251,7 @@ export interface FileRoutesById {
   '/portal': typeof PortalRouteWithChildren
   '/portfolio': typeof PortfolioRoute
   '/process': typeof ProcessRoute
+  '/rss.xml': typeof RssDotxmlRoute
   '/services': typeof ServicesRouteWithChildren
   '/dashboard/clickup': typeof DashboardClickupRoute
   '/dashboard/clients': typeof DashboardClientsRoute
@@ -274,6 +283,7 @@ export interface FileRouteTypes {
     | '/portal'
     | '/portfolio'
     | '/process'
+    | '/rss.xml'
     | '/services'
     | '/dashboard/clickup'
     | '/dashboard/clients'
@@ -301,6 +311,7 @@ export interface FileRouteTypes {
     | '/partners'
     | '/portfolio'
     | '/process'
+    | '/rss.xml'
     | '/services'
     | '/dashboard/clickup'
     | '/dashboard/clients'
@@ -330,6 +341,7 @@ export interface FileRouteTypes {
     | '/portal'
     | '/portfolio'
     | '/process'
+    | '/rss.xml'
     | '/services'
     | '/dashboard/clickup'
     | '/dashboard/clients'
@@ -360,6 +372,7 @@ export interface RootRouteChildren {
   PortalRoute: typeof PortalRouteWithChildren
   PortfolioRoute: typeof PortfolioRoute
   ProcessRoute: typeof ProcessRoute
+  RssDotxmlRoute: typeof RssDotxmlRoute
   ServicesRoute: typeof ServicesRouteWithChildren
   ProposalsYuliaRoute: typeof ProposalsYuliaRoute
   ApiPublicClickupWebhookRoute: typeof ApiPublicClickupWebhookRoute
@@ -372,6 +385,13 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rss.xml': {
+      id: '/rss.xml'
+      path: '/rss.xml'
+      fullPath: '/rss.xml'
+      preLoaderRoute: typeof RssDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/process': {
@@ -643,6 +663,7 @@ const rootRouteChildren: RootRouteChildren = {
   PortalRoute: PortalRouteWithChildren,
   PortfolioRoute: PortfolioRoute,
   ProcessRoute: ProcessRoute,
+  RssDotxmlRoute: RssDotxmlRoute,
   ServicesRoute: ServicesRouteWithChildren,
   ProposalsYuliaRoute: ProposalsYuliaRoute,
   ApiPublicClickupWebhookRoute: ApiPublicClickupWebhookRoute,
